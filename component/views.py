@@ -1,5 +1,12 @@
 from django.shortcuts import render,redirect
 
+from django.contrib.auth.models import User, auth
+from django.contrib.auth import get_user_model
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from .models import Registration,techblogs
+from .utils import generate_otp, sendingmail
+from .models import OTP
 
 
 import psycopg2
@@ -16,225 +23,277 @@ import psycopg2
 # db_config = psycopg2.connect(user="fx818", password="@Anurag818@", host="learnwithus.postgres.database.azure.com", port=5432, database="postgres")
 
 
-db_config = {
-    'user': 'postgres.mvaonazvlarpgxcrjpsp',
-    'password': '@learnwithus818@',
-    'host': 'aws-0-ap-south-1.pooler.supabase.com',
-    'port': 5432,
-    'database': 'postgres'
-}
-
-connection = psycopg2.connect(**db_config)
-
+# db_config = {
+#     'user': 'postgres.mvaonazvlarpgxcrjpsp',
+#     'password': '@learnwithus818@',
+#     'host': 'aws-0-ap-south-1.pooler.supabase.com',
+#     'port': 5432,
+#     'database': 'postgres'
+# }
+# connection = psycopg2.connect(**db_config)
 
 
-
-universal_username = None
-name = None
-data = ''
-
-# import attr
-# @attr.s(frozen=True)
-# class ImmutableClass:
-#     universal_username = attr.ib()
-
-# obj = ImmutableClass("Test Name")
 
 
 
 
 def logout(request):
-    global universal_username
-    universal_username = None
-    user_data = {
-        'username' : None,
-        'name' : None
-    }
-
-    return render(request,'home.html',user_data)
+    auth.logout(request)
+    return redirect('home')
 
 
+# Login
 def login(request):
-
-    connection = psycopg2.connect(**db_config)
-    # Create a cursor object to execute SQL queries
-    cursor = connection.cursor()
-
-
-    if request.method == 'POST':
+    if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password1']
+        user = auth.authenticate(
+            username = username,
+            password = password
+        )
 
-        if len(username)==0 or len(password)==0:
-            errormsg = {'error':'Username or password is empty !'}
-            return render(request,'index.html',errormsg)
-
-        sql_query = "SELECT * FROM \"user\" where username = %s;"
-        cursor.execute(sql_query,(username,))
-
-        rows = cursor.fetchall()
-        res = rows
-
-
-        if len(res)!=0 and res[0][-1] == password:
-
-            global name
-            name = res[0][0]
-            global universal_username
-            universal_username = (username,)
-
-            # home(request)
-            user_data = {
-                'username' : universal_username[0],
-                'name' : name
-            }
-            # data = username
-            return render(request,'home.html',user_data)
-            # return redirect('home')
-
+        if user is not None:
+            auth.login(request,user)
+            return redirect('home')
         else:
-            errormsg = {'error':'Username or password is incorrect !'}
-            return render(request,'index.html',errormsg)
-
-        # return redirect('index')
-
+            messages.info(request,'Invalid credentials')
+            return redirect('login')
+        
     else:
         return render(request,'index.html')
+    
+
+# importing from otp project
 
 
-def register(request):
-    connection = psycopg2.connect(**db_config)
-    cursor = connection.cursor()
-
+# sendingmail(subject, message, recipient_list)
+def emailotp(request):
     if request.method == 'POST':
-        name = request.POST['name']
+        
+        
+        useremail = request.POST['email']
+        otp = generate_otp()
+        
+        # Save OTP to the database
+        OTP.objects.create(useremail=useremail, otp=otp)
+
+        # Leaving it some work is still left like if email already exist then what to do??
+
+        addEmail = verifiedEmail.objects.create(email = useremail, isVerified = False)
+        addEmail.save()
+
+
+        # Sending OTP
+        subject = 'OTP verfiication'
+        message = f"Your One Time Password is : {otp}"
+        reciever = [useremail]
+        sendingmail(subject, message, reciever)
+        print("\nMail sent successfully\n")
+        
+        request.session['useremail'] = useremail
+        return redirect('verifyotp')
+    
+    return render(request, 'component/emailotp.html')
+
+
+
+
+def verifyotp(request):
+    if request.method == 'POST':
+            otp_input = request.POST['otp_input']
+            useremail = request.session.get('useremail')
+            
+            try:
+                otp_record = OTP.objects.get(useremail=useremail, otp=otp_input)
+                if otp_record.is_valid():
+                    addEmail = verifiedEmail.objects.get(email = useremail)
+                    addEmail.isVerified = True
+                    addEmail.save()
+                    return render(request, 'component/finalregister.html')
+                else:
+                    return render(request, 'component/verifyotp.html')
+            except OTP.DoesNotExist:
+                messages.info(request, "Some error occured with the OTP.")
+                return render(request, 'component/verifyotp.html')
+    
+    return render(request, 'component/verifyotp.html')
+
+from .models import verifiedEmail
+def finalregister(request):
+    useremail = request.session.get('useremail')
+    print("User email from session is: ",useremail)
+    try:
+        Verified = verifiedEmail.objects.get(email=useremail).isVerified
+    except:
+        Verified = False
+    if Verified == False:
+        messages.info(request,"Email not verified till now")
+        return render(request,'component/emailotp.html')
+    if request.method == "POST":
+        name = request.POST['fullname']
         username = request.POST['username']
-        email = request.POST['email']
+        email = useremail
         password1 = request.POST['password1']
         password2 = request.POST['password2']
-        skills = request.POST['skills']
+        first_name = name.split(' ')[0]
+        last_name = name.split(' ')[1]
         gender = request.POST['gender']
+        profile_pic = request.FILES.get('profile_pic')
+
+        skills = request.POST['skills']
         country = request.POST['country']
         linkedin = request.POST['linkedin']
         activitypoint = 0
 
-        query = "select rank from \"profile\";"
-        cursor.execute(query)
-
-        res = cursor.fetchall()
-        rank = int(res[-1][0])
-
         if password1 != password2:
-            err_msg = {
-                'error':'Password does not match !'
-            }
-            return render(request,'register.html',err_msg)
+            messages.info(request,'Sorry, Your password doesnot match!')
+            return render(request,'component/finalregister.html')
 
-        command1 = "INSERT INTO \"user\" (name, username, email, password) VALUES (%s, %s, %s, %s)"
-        command2 = "INSERT INTO \"profile\" (rank, username, skills, gender, country, linkedin, activitypoint) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-        cursor.execute(command1, (name, username, email, password1))
-        connection.commit()
-        cursor.execute(command2, (rank+1,username,skills,gender,country,linkedin,activitypoint))
-        connection.commit()
+        skill1 = skills.split(',')[0]
+        skill2 = skills.split(',')[1]
+        skill3 = skills.split(',')[2]
 
+        User = get_user_model()
+
+        # Check if the username already exists
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username already exists.')
+            return render(request, 'component/finalregister.html')
+
+        # Check if the email already exists
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Email already exists.')
+            return render(request, 'component/finalregister.html')
+
+        # Create the user
+        user = User.objects.create_user(
+            username=username,
+            email=email,
+            password=password1,
+            first_name=first_name,
+            last_name=last_name,
+            gender=gender,
+            skill1=skill1,
+            skill2=skill2,
+            skill3=skill3,
+            country=country,
+            linkedin=linkedin,
+            activitypoint=activitypoint, 
+            profile_pic=profile_pic
+        )
+        user.save()
+        user = auth.authenticate(
+            username = username,
+            password = password1
+        )
+        auth.login(request,user)
+
+        # Redirecting to the Homepage
         return redirect('home')
 
-    else:
-        return render(request,'register.html')
+    return render(request,'component/finalregister.html')
+
+
+
+# Modifying the User and making CustomUser
+# def register(request):
+#     if request.method == 'POST':
+
+#         name = request.POST['name']
+#         username = request.POST['username']
+#         email = request.POST['email']
+#         password1 = request.POST['password1']
+#         password2 = request.POST['password2']
+#         first_name = name.split(' ')[0]
+#         last_name = name.split(' ')[1]
+#         gender = request.POST['gender']
+#         profile_pic = request.FILES.get('profile_pic')
+
+#         skills = request.POST['skills']
+#         country = request.POST['country']
+#         linkedin = request.POST['linkedin']
+#         activitypoint = 0
+
+#         if password1 != password2:
+#             messages.info(request,'Sorry, Your password doesnot match!')
+#             return render(request,'register.html')
+
+#         skill1 = skills.split(',')[0]
+#         skill2 = skills.split(',')[1]
+#         skill3 = skills.split(',')[2]
+
+#         User = get_user_model()
+
+#         # Check if the username already exists
+#         if User.objects.filter(username=username).exists():
+#             messages.error(request, 'Username already exists.')
+#             return render(request, 'register.html')
+
+#         # Check if the email already exists
+#         if User.objects.filter(email=email).exists():
+#             messages.error(request, 'Email already exists.')
+#             return render(request, 'register.html')
+
+
+#         # before creating a user we would like to verify the user email via otp
+
+
+
+
+
+#         # Create the user
+#         user = User.objects.create_user(
+#             username=username,
+#             email=email,
+#             password=password1,
+#             first_name=first_name,
+#             last_name=last_name,
+#             gender=gender,
+#             skill1=skill1,
+#             skill2=skill2,
+#             skill3=skill3,
+#             country=country,
+#             linkedin=linkedin,
+#             activitypoint=activitypoint, 
+#             profile_pic=profile_pic
+#         )
+#         user.save()
+#         user = auth.authenticate(
+#             username = username,
+#             password = password1
+#         )
+#         auth.login(request,user)
+
+#         # Redirecting to the Homepage
+#         return redirect('home')
+
+#     return render(request, 'register.html')
 
 
 def home(request):
-    if universal_username is None:
-        return render(request,'home.html')
+    return render(request,'home.html')
 
-    user_data = {
-        'username' : universal_username[0],
-        'name' : name
-    }
-    return render(request,'home.html',user_data)
-
-
+# @login_required
 def techblog(request):
-    connection = psycopg2.connect(**db_config)
-    cursor = connection.cursor()
-    # global universal_username
-    global universal_username
-    username = universal_username
-
-    sql_query = "SELECT content FROM \"blogs\";"
-
-    id_query = "select id from \"blogs\";"
-    cursor.execute(id_query)
-    id = cursor.fetchall()
-    try:
-        nid = id[-1][0]
-    except:
-        nid=1
-    cursor.execute(sql_query)
-
-
-    rows = cursor.fetchall()
-    # result = rows[-1:-4:-1]
-    result = rows[::-1]
-
-
-    value = {
-            'data':result,
-            'username':universal_username
-    }
-
-    if request.method == 'POST':
-        content = request.POST['content']
-        link = request.POST['reflink']
-
-        sql_query = "SELECT content FROM \"blogs\";"
-        cursor.execute(sql_query)
-        rows = cursor.fetchall()
-        result = rows[::-1]
-
-
-        if len(content)==0 or content == "Start writing your blog here....(Please remove this text)" or content=='nill':
-            
-            errmsg={
-                'username':universal_username,
-                'error':'Please write some of your content !',
-                'data':result,
-                'username':universal_username
-
-            }
-
-            if content=='nill':
-
-
-                errmsg['error']  = ''
-
-                return render(request,'techblog.html',errmsg)
-
-        query = 'insert into blogs values(%s,%s,%s,%s)'
-        values = (nid+1,username,content,link)
-        cursor.execute(query,values)
-        connection.commit()  
-        sql_query = "SELECT content FROM \"blogs\";"
-        cursor.execute(sql_query)
-        rows = cursor.fetchall()
-        result = rows[::-1]
-        sql_query = "SELECT link FROM \"blogs\";"
-        cursor.execute(sql_query)
-        links = cursor.fetchall()
-        link_data = links[::-1]
-
-        content = 'nill'
-
-        value = {
-                'data':result,
-                'username':universal_username,
-                'link':link_data
-        }
-
-        return render(request,'techblog.html',value)
-
+    user = request.user
+    if user.id is not None:
+        all_blogs = techblogs.objects.all()
+        id = user.id
+        blogs_by_user = techblogs.objects.filter(username = id)
+        blogs_by_user = blogs_by_user[::-1]
+        
+        return render(request,'techblog.html',{
+            'blogs':blogs_by_user
+        })
     else:
-        return render(request,'techblog.html',value)
+        blogs_by_user = techblogs.objects.all()
+        blogs_by_user = blogs_by_user[::-1]
+        
+        return render(request,'techblog.html',{
+            'blogs':blogs_by_user
+        })
+
+
 
 def hackathon(request):
 
@@ -276,6 +335,7 @@ def hackathon(request):
     }
     return render(request,'hackathon.html',user_data)
 
+
 def opportunities(request):
     return render(request,'opportunities.html')
 
@@ -284,6 +344,31 @@ def githubblog(request):
 
 def msg(request):
     return render(request,'msg.html')
+
+
+@login_required
+def writetechblog(request):
+    
+    if request.method == "POST":
+        title = request.POST['title']
+        link = request.POST['link']
+        description = request.POST['description']
+
+        user = request.user
+        
+        add_blog = techblogs.objects.create(
+            username = user,
+            title = title,
+            link = link,
+            description = description
+        )
+        add_blog.save()
+        messages.info(request,'Written Sucessfully')
+        return redirect('techblog')
+    
+    else:
+        return render(request,'writetechblog.html')
+
 
 
 def courses(request):
@@ -353,58 +438,12 @@ def contact(request):
 
     return render(request,'contact.html')
 
+
+
+# @login_required
 def profile_page(request):
-
-    if universal_username is None:
-        return render(request,'loginerror.html')
-
-    user_data = {
-        'username' : universal_username[0]
-    }
-
-    connection = psycopg2.connect(**db_config)
-    cursor = connection.cursor()
-
-
-    sql_query = "SELECT * FROM \"profile\" where username=%s;"
-    cursor.execute(sql_query,(universal_username,))
-
-    retrieved_data = cursor.fetchall()
-    retrieved_data = retrieved_data[0]
-
-    res = retrieved_data
-
-
-    rank = res[0]
-    user_name = user_data['username']
-
-    skills = res[2].split(',')
-
-    skill_1 = skills[0]
-    skill_2 = skills[1]
-    skill_3 = skills[2]
-    activity_1 ='Operating System Notes'
-    activity_2 ='Software Engineering'
-    activity_3 ='Principles Of Programming Language'
-    gender= res[3]
-    country = res[4]
-    linkedin = res[5]
-    activity_points = res[6]
-    context = {'username':user_name,
-               'rank': rank,
-               'skill_1':skill_1,
-               'skill_2':skill_2,
-               'skill_3':skill_3,
-               'activity_1':activity_1,
-               'activity_2':activity_2,
-               'activity_3':activity_3,
-               'gender':gender,
-               'country':country,
-               'linkedin':linkedin,
-               'activity_points':activity_points
-               }
-
-    return render(request,'profile_page.html' ,context )
+    user = request.user
+    return render(request, 'profile_page.html')
 
 def notespedia(request):
     opportunities_for_fresher= ['Web Developer', 'App Developer' , 'Software Engineer', 'iOS Engineer', 'AI Developer', 'NLP Engineer', 'Data Scientist','Data Analyst', 'Data Engineer', 'Course Engineer']
@@ -440,8 +479,51 @@ def terms_and_conditions(request):
     return render(request, 'terms_and_conditions.html')
 
 
+def daily_leetcode_questions(request):
+
+    daily_link = "<iframe height='400rem' width='750rem' src='https://www.youtube.com/embed/4DsZZ_otpU8?si=pO0aPdIMllp6ULM1' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>"
+    
+    daily = {
+        'link' : daily_link
+    }
+
+    return render(request, 'daily_leetcode_questions.html',daily)
+
+
 def soon(request):
     return render(request, 'soon.html')
+
+
+
+
+def news(request):
+    import requests
+    api_key = 'a83ab2795c40404a822cb5e4fb524682'
+    # url = 'https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=a83ab2795c40404a822cb5e4fb524682'
+    # url = 'https://newsapi.org/v2/top-headlines?category=technology&apiKey=a83ab2795c40404a822cb5e4fb524682'
+    url = 'https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=a83ab2795c40404a822cb5e4fb524682'
+    data = requests.get(url)
+    result = data.json()
+
+    # print(result)
+    # print(result['status'])
+    # print(result['totalResults'])
+    # print(result['articles'][0])
+    # print(result['articles'][0]['source'])
+    # print(result['articles'][0]['author'])
+    # print('Article title : ',result['articles'][0]['title'])
+    # print('Article description : ',result['articles'][0]['description'])
+
+    data_to_send = {
+        'allarticle': result['articles'],
+        'total': result['totalResults']
+    }
+
+    return render(request,'news.html',data_to_send)
+
+
+
+
 
 
 # connection = psycopg2.connect(**db_config)

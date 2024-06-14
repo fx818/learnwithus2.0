@@ -10,6 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+
+# from chatgpt for custom user
+AUTH_USER_MODEL = 'component.CustomUser'
+
+
 from pathlib import Path
 import os
 
@@ -37,14 +42,16 @@ ALLOWED_HOSTS = [
     'ec2amaz-iakr70o.eu-north-1.compute.internal',
     '127.0.0.1',
     '172.31.5.103',
-    '16.16.220.198'
+    '16.16.220.198',
+    # '192.168.121.180' # for my local development
 ]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'component',
+    # 'component',
+    'component.apps.MyAppConfig',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -68,7 +75,7 @@ ROOT_URLCONF = "learnwithus.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR,'template'],
+        "DIRS": [BASE_DIR / 'templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -84,17 +91,36 @@ TEMPLATES = [
 WSGI_APPLICATION = "learnwithus.wsgi.application"
 
 
+
+
+
+# settings.py
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'anuragfx818@gmail.com'
+EMAIL_HOST_PASSWORD = 'ycfxfnaerstmfjnl'
+DEFAULT_FROM_EMAIL = 'anuragfx818@gmail.com'
+
+
+
+
+
+
+
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
-
+# railway
 # DATABASES = {
 #     'default':{
 #         "ENGINE":"django.db.backends.postgresql",
@@ -123,6 +149,10 @@ WSGI_APPLICATION = "learnwithus.wsgi.application"
 
 
 
+
+
+
+
 # AWS Databases
 # DATABASES = {
 #     'default':{
@@ -137,16 +167,16 @@ WSGI_APPLICATION = "learnwithus.wsgi.application"
 
 
 # Using Supabase
-DATABASES = {
-    'default':{
-        "ENGINE":"django.db.backends.postgresql",
-        "NAME":'postgres',
-        "USER":'postgres.mvaonazvlarpgxcrjpsp',
-        'PASSWORD':'@learnwithus818@',
-        'HOST':'aws-0-ap-south-1.pooler.supabase.com',
-        'PORT':'5432'
-    }
-}
+# DATABASES = {
+#     'default':{
+#         "ENGINE":"django.db.backends.postgresql",
+#         "NAME":'postgres',
+#         "USER":'postgres.mvaonazvlarpgxcrjpsp',
+#         'PASSWORD':'@learnwithus818@',
+#         'HOST':'aws-0-ap-south-1.pooler.supabase.com',
+#         'PORT':'5432'
+#     }
+# }
 
 
 
@@ -215,6 +245,11 @@ STATICFILES_DIRS = (
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build')
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # MEDIA_URL = 'img/'
 # MEDIA_ROOT = BASE_DIR/'media'
@@ -223,3 +258,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+
+# from chatgpt for custom user
+AUTH_USER_MODEL = 'component.CustomUser'

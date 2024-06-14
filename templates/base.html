@@ -194,10 +194,12 @@
             <div><a href="notespedia">NotesPedia</a></div>
             <!-- Adding Techblog now -->
             <div><a href="techblog">Techblogs</a></div>
-            <!-- <div><a href="profile_page">Profile</a></div> -->
+            <div><a href="profile_page">Profile</a></div>
             
-            {% if username is not None %}
+            {% if user.is_authenticated %}
+
             <div><a href="logout">Logout</a></div>
+            
             {% endif %}
 
         </div>

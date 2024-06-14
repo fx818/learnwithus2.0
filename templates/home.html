@@ -214,18 +214,18 @@
 
     }
 
-    .competition{
+    .competition {
         display: flex;
         flex-direction: column;
         row-gap: 6vw;
         margin-top: 4vw;
     }
 
-    .container-img img{
+    .container-img img {
         height: 25vw;
     }
 
-    .video{
+    .video {
         display: flex;
         text-wrap: wrap;
         column-gap: 5vw;
@@ -234,11 +234,12 @@
         place-items: center;
         font-size: 1.2rem;
     }
-    .video2{
+
+    .video2 {
         flex-direction: row-reverse;
     }
 
-    .video h3{
+    .video h3 {
         font-style: 'Protest Riot';
         text-decoration: underline;
         border-bottom: 2px solid rgb(22, 33, 62);
@@ -272,10 +273,12 @@
             flex-direction: column-reverse;
             row-gap: 2rem;
         }
-        .video{
+
+        .video {
             flex-direction: column-reverse;
         }
-        .competition video{
+
+        .competition video {
             height: 35vw;
         }
     }
@@ -349,16 +352,16 @@ LearnWithUs - Shaping Tech Genius
 
 
 
-        {% if username is not None %}
-        <p style="font-size: 2rem;">Welcome back !</p>
-        <input type="text" placeholder="What do you wanna learn today !">
-
+        {% if user.is_authenticated %}
+        <p style="font-size: 1.8rem;">Welcome back {{user.first_name}} !</p>
+        
+        <input type="text" placeholder="What do you wanna learn today?">
         {% else %}
 
         <!-- Commenting for now -->
         <p class="login-link">
             <a href="login">Login Now</a>
-            <a href="register">Create an Account</a>
+            <a href="emailotp">Create an Account</a>
         </p>
 
         {% endif %}
@@ -376,7 +379,7 @@ LearnWithUs - Shaping Tech Genius
 
 </div>
 <br> <br>
-
+<hr>
 <div class="explore-text">
     <h1>Start Exploring</h1>
 </div>
@@ -403,6 +406,9 @@ LearnWithUs - Shaping Tech Genius
 </div>
 
 <br><br>
+
+<hr>
+
 <div class="explore-text">
     <h1>Events !</h1>
 </div>

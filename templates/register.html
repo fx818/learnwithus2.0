@@ -1,0 +1,90 @@
+{% extends "emailbase.html" %}
+{% load static %}
+
+{% block title %}
+Verify OTP
+{% endblock %}
+
+
+{% block content %}
+
+{% if user.is_authenticated is None %}
+
+<form method="POST" action="register" enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    <div>
+        <h1 style="text-align: center; color: rgb(22, 32, 62); font-family: cursive;">Welcome !</h1>
+        <!-- <h2>Let's create your account</h2> -->
+        <h2>Let's verify your email</h2>
+    </div>
+
+    <div class="login-form">
+
+        {% for message in messages %}
+        <p style="margin: 0; padding: 0; text-align: center; color: rgb(93, 0, 0);">
+            {{message}}
+        </p>
+        {% endfor %}
+
+        <!-- <div>
+                        <input type="text" name="name" placeholder="Your Full name">
+                    </div> 
+                    <div>
+                        <input type="text" name="username" placeholder="Set an unique Username">
+                    </div> -->
+
+        <div>
+            <input type="email" name="email" placeholder="Your email address">
+        </div>
+
+        <!-- <div>
+                        <input type="password" name="password1" placeholder="Password">
+                    </div>
+                    <div>
+                        <input type="password" name="password2" placeholder="Confirm Password">
+                    </div>
+                     <div>
+                        <input type="text" name="gender" placeholder="Gender">
+                    </div>
+
+                     <div>
+                        <input type="text" name="skills" placeholder="Type all your skills(comma seperated)">
+                    </div>
+                    <div>
+                        <input type="text" name="country" placeholder="Your country">
+                    </div>
+                    <div>
+                        <input type="text" name="linkedin" placeholder="Link for your LinkedIn profile">
+                    </div>
+
+                    <div
+                        style="border: 2px solid rgb(22, 32, 62); border-radius: 1rem; padding-left: .5rem; margin-bottom: .1rem;">
+                        <label for="profile_pic">Profile Picture:</label>
+                        <input style="border: 0; box-shadow: 0 0 0 0; border-radius: 0;" class="profile_pic_upload"
+                            type="file" id="profile_pic" name="profile_pic" accept="image/*" required>
+                    </div> -->
+
+    </div>
+
+    <br>
+
+    <div class="login-button">
+        <input type="submit" value="Generate OTP">
+        <br>
+        <p style="color: red; text-align: center;">{{error}}</p>
+    </div>
+
+</form>
+
+<div class="register-btn-div">
+    <a href="login" class="register-btn">Login Now</a>
+</div>
+
+{% endif %}
+
+
+
+
+{% endblock %}

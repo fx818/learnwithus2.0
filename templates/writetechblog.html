@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block linkcss %}
+
+{% endblock %}
+
+{% block style %}
+<style>
+
+</style>
+
+{% endblock %}
+
+{% block title %}
+Home | LearnWithUs
+{% endblock %}
+
+
+
+{% block heading %}
+Write You Blog @ LearnWithUS
+{% endblock %}
+
+
+{% block content %}
+
+<h1>
+    Here we will write our blog!
+</h1>
+
+<form action="writetechblog" method="POST">
+    {% csrf_token %}
+
+
+    <input type="text" name="title" placeholder="Title for you blog"> <br> <br>
+    <input type="text" name="link" placeholder="Reference link"> <br> <br>
+    <textarea name="description" cols="50" rows="5">Start Writing you blog now.</textarea>
+    <br><br>
+
+    <input type="submit" value="Write">
+
+
+</form>
+
+{% endblock %}

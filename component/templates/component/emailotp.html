@@ -1,0 +1,91 @@
+{% extends "component/emailbase.html" %}
+{% load static %}
+
+{% block title %}
+Register Your Email
+{% endblock %}
+
+
+{% block content %}
+
+
+
+
+<div class="body">
+
+    <div class="left">
+        <div>
+            <h1 style="color: rgb(255, 255, 255);">LearnWithus </h1>
+        </div>
+
+        <!--<div class="register-btn-div">
+            <a href="register" class="register-btn">Register Now</a>
+        </div> -->
+        <img style="height: 40vh;"
+            src="{% static 'images/lounge-digital-data-protection-and-information-security.gif' %}" alt="">
+    </div>
+
+    <div class="right">
+        {% if user.is_authenticated %}
+
+
+        <div class="right" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">
+            <div>
+                <h1 style="color: rgb(22, 33, 62); font-size: 1.2rem; text-align: center;">Sorry buddy ! <br> But you
+                    are already logged in. <br>Still wanna create an another account? <br> Then <a
+                        href="logout">logout</a> first. <br><br>Go to <a href="home">HomePage</a></h1>
+                <!-- <h2>Still wannn create an account then logout first!</h2> -->
+            </div>
+        </div>
+
+
+        {% else %}
+
+
+
+
+        <form method="POST" action="emailotp" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <div>
+                <h1 style="text-align: center; color: rgb(22, 32, 62); font-family: cursive;">Welcome !</h1>
+                <!-- <h2>Let's create your account</h2> -->
+                <h2>Let's verify your email</h2>
+            </div>
+
+            <div class="login-form">
+
+                {% for message in messages %}
+                <p style="margin: 0; padding: 0; text-align: center; color: rgb(93, 0, 0);">
+                    {{message}}
+                </p>
+                {% endfor %}
+
+                <div>
+                    <input type="email" name="email" placeholder="Your email address">
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="login-button">
+                <input type="submit" value="Generate OTP">
+                <br>
+                <p style="color: red; text-align: center;">{{error}}</p>
+            </div>
+
+        </form>
+
+        <div class="register-btn-div">
+            <a href="login" class="register-btn">Login Now</a>
+        </div>
+    </div>
+
+    {% endif %}
+</div>
+
+</div>
+
+{% endblock %}

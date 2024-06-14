@@ -246,26 +246,28 @@ TechBlog @ LearnWithUs
 
     <div class="left-parent">
         <div class="blog">
-            <h1>Recent Blogs </h1>
+            <h1>
+
+                {% if user.is_authenticated %}
+                Your recent Blogs
+                {% else %}
+                All Blogs
+                {% endif %}
+            </h1>
         </div>
         <div class="left">
 
-            {% for i in data %}
-
-            {% for j in i %}
+            {% for i in blogs %}
             <div class="blog fulldata">
                 <div class="content">
                     <p>
-                        {{j}}
+                        {{i.title}}
                     </p>
                 </div>
                 <div class="readmore">
                     <a href="soon" target="_blank">Read_more</a>
                 </div>
             </div>
-
-
-            {% endfor %}
             <br>
             {% endfor %}
 
@@ -295,9 +297,10 @@ TechBlog @ LearnWithUs
         </div>
         <!-- <div> -->
         
-        {% if username is not None %}
+        {% if user.is_authenticated %}
         
-        <form action="techblog" method="POST">
+        <h3>Write your own blogs here..... <a href="writetechblog">(Click me)</a></h3>
+        <!-- <form action="techblog" method="POST">
             <div class="writeblog">
                 {% csrf_token %}
 
@@ -311,9 +314,9 @@ TechBlog @ LearnWithUs
                 <div class="submit-div">
                     <input class="submit" type="submit" value="Submit">
                 </div>
-                <!-- </div> -->
+                
             </div>
-        </form>
+        </form> -->
 
         {% else %}
 

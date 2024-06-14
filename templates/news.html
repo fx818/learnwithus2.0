@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+News | LearnWithUs
+{% endblock %}
+<!--API KEY a83ab2795c40404a822cb5e4fb524682 -->
+
+{% block heading %}
+News @ LearnWithUs
+{% endblock %}
+
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<h2>News section</h2>
+
+<p>All results</p>
+<p>
+    total articles: {{total}} <br>
+    <!-- {{allarticle}} -->
+</p>
+
+{% for data in allarticle %}
+
+{% if data.description is not None %}
+<b>{{data.author}}</b> <br>
+<b>{{data.title}}</b> <br>
+<!-- <a href="">Link</a> <br> -->
+{{data.description}} <br> <br>
+
+{% endif %}
+{% endfor %}
+
+{% else %}
+
+<h3>Login to see news</h3>
+<a href="login">
+    Login Now
+</a>
+
+{% endif %}
+
+{% endblock %}

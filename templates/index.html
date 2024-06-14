@@ -33,7 +33,7 @@
         }
         .body{
             display: grid;
-            grid-template-columns: 3fr 2fr;
+            grid-template-columns: 3.5fr 2fr;
             justify-content: center;
             place-content: center;
             /* place-items: center; */
@@ -152,18 +152,6 @@
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
 
-        @media (min-width:800px){
-            .right h1{
-                padding: 0 !important;
-                margin-top: 1rem;
-                padding-top: 3rem !important;
-            }
-            .register-btn-div{
-                margin-top: -3rem !important;
-            }
-        }
-
-
         @media (max-width:800px){
             .left{
                 display: none;
@@ -195,17 +183,6 @@
                 /* color: rgb(22, 33, 62); */
 
             }
-            .right h1{
-                color: white !important;
-                padding: 0 !important;
-                margin-top: 1rem;
-                padding-top: 3rem !important;
-            }
-        }
-        @media (max-width: 600px){
-            .login-form input{
-                width: 50vw;
-            }
         }
 
 
@@ -228,53 +205,47 @@
             </div> -->
             <img style="height: 40vh;" src="{% static 'images/lounge-digital-data-protection-and-information-security.gif' %}" alt="">
         </div>
+
+        {% if user.is_authenticated %}
+
         <div class="right">
-            <form method="POST" action="register" autocomplete="off">
+            <div style="border: 2px solid rgb(22, 32, 62); border-radius: 1rem; padding: .5rem; padding-left: 1rem; padding-right: 1rem;">
+                <h1 style="font-size: 1.25rem; text-align: center;">Sorry {{user.first_name}} buddy! <br> But you are already Logged In. </h1>
+                <h2 style="font-size: 1.25rem; text-align: center;">Go to <a href="home">HomePage</a></h2>
+            </div>
+        </div>
+
+        {% else %}
+        
+        <div class="right">
+
+
+            <form method="POST" action="login" autocomplete="off">
     
                 {% csrf_token %}
     
                 <div>
-                    <h1 style="text-align: center; color: rgb(22, 32, 62); font-family: cursive;">Welcome !</h1>
-                    <h2>Let's create your account</h2>
+                    <h1 style="text-align: center; color: rgb(22, 32, 62); font-family: cursive; padding-bottom: 2rem;">Welcome back !</h1>
+                    <!-- <div class="login-button"><h1>Hello !</h1> </div> -->
+                    <h2>Sign in to your account</h2>
                 </div>
     
                 <div class="login-form">
                     <div>
-                        <input type="text" name="name" placeholder="Your Full name">
+                        <!-- <label>Username :</label> -->
+                        <input type="text" name="username" placeholder="Username">
                     </div>
+    
                     <div>
-                        <input type="text" name="username" placeholder="Set an unique Username">
-                    </div>
-                    
-                    <div>
+                        <!-- <label>Password :</label> -->
                         <input type="password" name="password1" placeholder="Password">
                     </div>
-                    <div>
-                        <input type="password" name="password2" placeholder="Confirm Password">
-                    </div>
-                    <div>
-                        <input type="email" name="email" placeholder="Your email address">
-                    </div>
-                    <div>
-                        <input type="text" name="gender" placeholder="Gender">
-                    </div>
-                    <div>
-                        <input type="text" name="skills" placeholder="Type all your skills(comma seperated)">
-                    </div>
-                    <div>
-                        <input type="text" name="country" placeholder="Your country">
-                    </div>
-                    <div>
-                        <input type="text" name="linkedin" placeholder="Link for your LinkedIn profile">
-                    </div>
-                    
                 </div>
     
                 <br><br>
     
                 <div class="login-button">
-                    <input type="submit" value="Create Account">
-                    <br>
+                    <input type="submit" value="Login Now">
                     <p style="color: red; text-align: center;">{{error}}</p>
                 </div>
     
@@ -283,9 +254,11 @@
                 <a href="">Register Now</a>
             </div> -->
              <div class="register-btn-div">
-                <a href="login" class="register-btn">Login Now</a>
+                <a href="register" class="register-btn">Register Now</a>
             </div>
         </div>
+
+        {% endif %}
 
     </div>
 
