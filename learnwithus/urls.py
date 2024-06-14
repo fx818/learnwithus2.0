@@ -24,7 +24,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin_at_learnwithus_secured_via_high_security/", admin.site.urls),
-    path('',include('component.urls'))
+    path('',include('component.urls')),
+    path("accounts/",include("allauth.urls")),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

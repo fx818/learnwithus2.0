@@ -69,8 +69,6 @@ def login(request):
 # sendingmail(subject, message, recipient_list)
 def emailotp(request):
     if request.method == 'POST':
-        
-        
         useremail = request.POST['email']
         otp = generate_otp()
         
@@ -540,3 +538,12 @@ def news(request):
 
 
 # random
+
+def logout_view(request):
+    logout(request)
+    return redirect("home")
+
+    
+# def profile_page(request):
+#     return render(request,'profile_page.html')
+    

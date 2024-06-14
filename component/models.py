@@ -15,7 +15,7 @@ class Registration(models.Model):
 
 
 # from chatgpt to make custom user model
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db import models
 
 class CustomUser(AbstractUser):
@@ -27,6 +27,9 @@ class CustomUser(AbstractUser):
     country = models.CharField(max_length=100, null=True)
     linkedin = models.CharField(max_length=250, null=True)
     activitypoint = models.IntegerField(null=True)
+    groups = models.ManyToManyField(Group, related_name='customuser_set', blank=True)
+    user_permissions = models.ManyToManyField(Permission, related_name='customuser_set', blank=True)
+
 
 
 

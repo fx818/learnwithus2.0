@@ -6,11 +6,26 @@ class ComponentConfig(AppConfig):
     name = "component"
 
 
-# myapp/apps.py
-from django.apps import AppConfig
-
 class MyAppConfig(AppConfig):
     name = 'component'
 
     def ready(self):
         import component.signals
+
+
+
+from django.apps import AppConfig
+class componentConfig(AppConfig):
+    name = 'component'
+    def ready(self):
+        import component.signals
+
+
+
+# apps.py
+from django.apps import AppConfig
+class YourAppNameConfig(AppConfig):
+    name = 'component'
+    def ready(self):
+        import component.signals
+

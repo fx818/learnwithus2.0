@@ -1,5 +1,5 @@
 <!-- {% load static %} -->
-
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -250,9 +250,9 @@
                 </div>
     
             </form>
-            <!-- <div>
-                <a href="">Register Now</a>
-            </div> -->
+            <div>
+                <a href="{% provider_login_url 'google' %}?next=/">Login With Google</a>
+            </div>
              <div class="register-btn-div">
                 <a href="register" class="register-btn">Register Now</a>
             </div>

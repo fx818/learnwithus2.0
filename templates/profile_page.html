@@ -52,17 +52,22 @@ Your Profile @ LearnWithUs
 <div class="main">
     <div class="left">
         <div class="profile_main">
+            {% if user.profile_pic.url is not None %}
             <img src="{{user.profile_pic.url}}" alt="" class="profile_photo" id="dp">
+            {% else %}
+            <img src="{% static 'images/default_male_pic.png'%}" alt="" class="profile_photo" id="dp">
+            {% endif %}
+
             <div class="profile_right">
                 <p class="name"><b>{{user.first_name}} {{user.last_name}}</b> <br> <span style="margin-left: .1rem;">{{user.country}}</span> </p>
                 <p class="rank"><b>Rank : {{rank}}</b></p>
             </div>
 
-        </div>
-        <div class="edit_profile">
-            <button class="edit_profile_button">
-                <a href="#" class="edit_profile_text">Edit Profile</a>
-            </button>
+            </div>
+            <div class="edit_profile">
+                <button class="edit_profile_button">
+                    <a href="#" class="edit_profile_text">Edit Profile</a>
+                </button>
         </div>
         <!-- <div style="width: 24rem; height: 0.2rem; background-color: #16213E; position: relative;top:-0.5rem; left: 1.5rem;"></div> -->
         <div class="horizontal_line"></div>
@@ -198,7 +203,7 @@ Your Profile @ LearnWithUs
         <p class="login-link">
             <a href="login">Login Now</a>
             <br> <br><br>
-            <a href="register">Create an Account</a>
+            <a href="emailotp">Create an Account</a>
         </p>
 
     </div>
