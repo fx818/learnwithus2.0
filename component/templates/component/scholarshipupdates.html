@@ -1,0 +1,16 @@
+
+{% if user.is_superuser %}
+<form action="scholarshipupdatesatlearnwithus" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{forms.errors}}
+    {{msg}}
+    {{forms.as_p}}
+
+    <input type="submit" value="Submit">
+
+</form>
+<a href="home">Home</a>
+{% else %}
+<h2>You need to be a superuser to access this page <br> Only admins can access this page</h2>
+<a href="home">Home</a>
+{% endif %}

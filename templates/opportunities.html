@@ -250,7 +250,7 @@ Opportunities @ LearnWithUs
     <!-- Internship Section -->
     <section>
         <div class="heading-data">
-            <h2>Dynamic Internships</h2>
+            <h2>Internships</h2>
         </div>
         {% if user.is_superuser %}
         <a href="internshipupdatesatlearnwithus">Update Internships</a>
@@ -264,10 +264,8 @@ Opportunities @ LearnWithUs
                 <h3>{{internship.title}}</h3>
                 <img src="{{internship.image.url}}" alt="">
                 <p>
-                    {{internship.desc}} 
-                    <a
-                        href="{{internship.link}}"
-                        target="_blank">
+                    {{internship.desc}}
+                    <a href="{{internship.link}}" target="_blank">
                         Learn More
                     </a>
 
@@ -316,73 +314,29 @@ Opportunities @ LearnWithUs
     <br>
 
     <!-- Scholarships Section -->
+    <!-- scholarshipupdatesatlearnwithus -->
     <section>
         <div class="heading-data">
             <h2>Scholarships</h2>
         </div>
+
+        {% if user.is_superuser %}
+        <a href="scholarshipupdatesatlearnwithus">Update Scholarships</a>
+        {% endif %}
+        <!-- for scholarships -->
         <div class="all-interships">
 
-            <div class="internship-detail">
-                <h3>Reliance undergraduate Scholarship</h3>
-                <img src="{% static 'oppimages/reliance.webp' %}" alt="">
-                <p>
-                    Reliance Foundation is an Indian non-profit organisation which was founded in 2010 by Mukesh
-                    Ambani. Provides scholarship all engineering colleges in India who are pursuing their studies in
-                    ECE, EE, EEE, IT, CS. <a href="">Learn More</a>
 
+            {% for scholarship in scholarships %}
+            <div class="internship-detail">
+                <h3>{{scholarship.title}}</h3>
+                <img src="{{scholarship.image.url}}" alt="">
+                <p>
+                    {{scholarship.desc}}
+                    <a href="{{scholarship.link}}">Learn More</a>
                 </p>
             </div>
-            <div class="internship-detail">
-                <h3>Siemens Scholarship Program</h3>
-                <img src="{% static 'oppimages/seimens.jpg' %}" alt="">
-                <p>
-                    Siemens Scholarship Program is a scholarship program conducted by Siemens India. The program
-                    offers financial support and employment opportunities to students pursuing a first-year
-                    engineering degree at government colleges. <a href="">Learn
-                        More</a>
-
-                </p>
-            </div>
-            <div class="internship-detail">
-                <h3>ONGC Scholarship</h3>
-                <img src="{% static 'oppimages/ongc.png' %}" alt="">
-                <p>
-                    ONGC, as the nation’s pioneer Oil and Gas Company, has been making gigantic impact in India’s
-                    economy and society. Its contribution towards inclusive and sustainable growth has made a
-                    difference to the lives of many. <a href="">Learn More</a>
-
-                </p>
-            </div>
-            <div class="internship-detail">
-                <h3>FAEA Scholarship</h3>
-                <img src="{% static 'oppimages/faea.png' %}" alt="">
-                <p>
-                    FAEA invites application for scholarships for the year 2023-24 to pursue undergraduate studies
-                    in arts/commerce/science/medical/engineering and other technical and professional disciplines at
-                    any university/institution/college in India. <a href="">Learn More</a>
-
-                </p>
-            </div>
-            <div class="internship-detail">
-                <h3>HDFC Bank Parivartan's ECSS Programme 2023-24</h3>
-                <img src="{% static 'oppimages/hdfc-parivartan.png' %}" alt="">
-                <p>
-                    HDFC Bank Parivartan's ECSS Programme aims to support meritorious and needy students belonging
-                    to underprivileged sections of society. <a href="">Learn More</a>
-
-                </p>
-            </div>
-            <div class="internship-detail">
-                <h3>Kotak Kanya Scholarship 2023</h3>
-                <img src="{% static 'oppimages/Kotak-Bank.jpg' %}" alt="">
-                <p>
-                    Kotak Kanya Scholarship programme provides financial assistance to meritorious girl students
-                    from underserved communities from all across India to complete their higher education. <a
-                        href="">Learn More</a>
-
-                </p>
-            </div>
-
+            {% endfor %}
 
 
         </div>
@@ -396,52 +350,22 @@ Opportunities @ LearnWithUs
         <div class="heading-data">
             <h2>Job Opportunities</h2>
         </div>
+        {% if user.is_superuser %}
+        <a href="jobupdatesatlearnwithus">Update Jobs</a>
+        {% endif %}
         <div class="all-interships">
 
+            {% for job in jobs %}
             <div class="internship-detail">
-                <h3>Node JS Developer</h3>
-                <img src="{% static 'oppimages/tcs.png' %}" alt="">
+                <h3>{{job.title}}</h3>
+                <img src="{{job.image.url}}" alt="">
                 <p>
-                    TCS presents an excellent opportunity for Node JS Developer. Experience (Yrs) : 10+ years.
-                    Location: Hyderabad, Bangalore, Kochi, Gurgaon, Noida, Bhubaneswar. <a
-                        href="https://www.linkedin.com/jobs/view/3821139008" target="_blank">Learn More</a>
-
-                </p>
-            </div>
-            <div class="internship-detail">
-                <h3>Generative AI Engineer</h3>
-                <img src="{% static 'oppimages/aiesco.png' %}" alt="">
-                <p>
-                    AISEO.ai is seeking a talented and experienced Generative AI Engineer to join our dynamic team.
-                    In this role, you will be responsible for developing and enhancing our generative AI tools. <a
-                        href="https://www.linkedin.com/jobs/view/3822122236" target="_blank">Learn More</a>
-
-                </p>
-            </div>
-            <div class="internship-detail">
-                <h3>Data Engineer</h3>
-                <img src="{% static 'oppimages/outsized.png' %}" alt="">
-                <p>
-                    Your expertise will contribute to the development of robust data pipelines, ensuring the
-                    availability and accessibility of high-quality data. <a
-                        href="https://www.linkedin.com/jobs/view/3816309864" target="_blank">Learn More</a>
-
-                </p>
-            </div>
-            <div class="internship-detail">
-                <h3>Wordpress Developer</h3>
-                <img src="{% static 'oppimages/spearmint.png' %}" alt="">
-                <p>
-                    Spearmint is a software firm that actually operates on a global scale and is motivated by
-                    excellence. Since its inception, our company has seen a year-over-year expansion in terms of its
-                    revenue, profitability, clientele, and workforce. <a
-                        href="https://www.linkedin.com/jobs/view/3820479904" target="_blank">Learn More</a>
-
+                    {{job.desc}}
+                    <a href="{{job.link}}">Apply Now</a>
                 </p>
             </div>
 
-
-
+            {% endfor %}
 
         </div>
     </section>

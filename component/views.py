@@ -4,10 +4,10 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Registration,techblogs, verifiedEmail, InternshipModel, CompetetionModel
+from .models import Registration,techblogs, verifiedEmail, InternshipModel, CompetetionModel, scholarshipModel, jobModel
 from .utils import generate_otp, sendingmail
 from .models import OTP
-from .forms import hackathonRegForm, internshupUpdateForm, contactForm,competetionUpdateForm
+from .forms import hackathonRegForm, internshupUpdateForm, contactForm,competetionUpdateForm,scholarshipUpdateForm, jobUpdateForm
 
 
 import psycopg2
@@ -364,12 +364,77 @@ def competetionupdatesatlearnwithus(request):
 
 
 
+
+@login_required
+def scholarshipupdatesatlearnwithus(request):
+    user = request.user
+    print(user.is_superuser)
+    if request.method == 'POST':
+        form = scholarshipUpdateForm(request.POST, request.FILES)  # Add request.FILES to handle file uploads
+        if form.is_valid():
+            form.save()
+            return render(
+                request,
+                'component/scholarshipupdates.html',
+                {'msg':'Updated succesfully',
+                 'forms':form
+                }
+            )
+        else:
+            return render(request,
+                          'component/scholarshipupdates.html',
+                          {'msg':'Form is not valid',
+                           'forms':form
+                           }
+                        )
+    else:
+        form = scholarshipUpdateForm()
+    return render(request,'component/scholarshipupdates.html',{'forms':form})
+    
+
+
+
+@login_required
+def jobupdatesatlearnwithus(request):
+    user = request.user
+    print(user.is_superuser)
+    if request.method == 'POST':
+        form = jobUpdateForm(request.POST, request.FILES)  # Add request.FILES to handle file uploads
+        if form.is_valid():
+            form.save()
+            return render(
+                request,
+                'component/jobupdates.html',
+                {'msg':'Updated succesfully',
+                 'forms':form
+                }
+            )
+        else:
+            return render(request,
+                          'component/jobupdates.html',
+                          {'msg':'Form is not valid',
+                           'forms':form
+                           }
+                        )
+    else:
+        form = jobUpdateForm()
+    return render(request,'component/jobupdates.html',{'forms':form})
+    
+
+
+
+
 def opportunities(request):
     internships = InternshipModel.objects.all()
     competetion = CompetetionModel.objects.all()
+    scholarship = scholarshipModel.objects.all()
+    job = jobModel.objects.all()
     return render(request,'opportunities.html',
                   {'internships':internships,
-                   'competetions':competetion}
+                   'competetions':competetion,
+                   'scholarships':scholarship,
+                   'jobs':job
+                   }
                   )
 
 def githubblog(request):

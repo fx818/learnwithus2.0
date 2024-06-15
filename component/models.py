@@ -108,7 +108,7 @@ class InternshipModel(models.Model):
     link = models.CharField(max_length=250)
 
     class Meta:
-        verbose_name_plural = 'Internship Data'
+        verbose_name_plural = 'Opp-Internship Data'
 
 
 class CompetetionModel(models.Model):
@@ -118,4 +118,22 @@ class CompetetionModel(models.Model):
     link = models.CharField(max_length=250)
 
     class Meta:
-        verbose_name_plural = 'Hackathon and Competetion Data'
+        verbose_name_plural = 'Opp-Hackathon and Competetion Data'
+
+class scholarshipModel(models.Model):
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='opportunities/scholarships', null=True, blank=True)
+    desc = models.CharField(max_length=1000)
+    link = models.CharField(max_length=250)
+
+    class Meta:
+        verbose_name_plural = 'Opp-Scholarship Data'
+
+class jobModel(models.Model):
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='opportunities/jobs', null=True, blank=True)
+    desc = models.CharField(max_length=1000)
+    link = models.CharField(max_length=250, null=True)
+
+    class Meta:
+        verbose_name_plural = 'Opp-Job Data'

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Registration,techblogs,OTP,verifiedEmail, ContactModel, hackathonRegModel, InternshipModel, CompetetionModel
+from .models import Registration,techblogs,OTP,verifiedEmail, ContactModel, hackathonRegModel, InternshipModel, CompetetionModel, scholarshipModel, jobModel
 # Register your models here.
 admin.site.register(Registration)
 
@@ -68,3 +68,17 @@ class CompetetionModelAdmin(admin.ModelAdmin):
     search_fields = ('title', 'link')
 
 admin.site.register(CompetetionModel, CompetetionModelAdmin)
+
+class scholarshipModelAdmin(admin.ModelAdmin):
+    list_display = ('title', 'link', 'desc')
+    list_filter = ('title',)
+    search_fields = ('title', 'link')
+
+admin.site.register(scholarshipModel, scholarshipModelAdmin)
+
+class jobModelAdmin(admin.ModelAdmin):
+    list_display = ('title', 'link', 'desc')
+    list_filter = ('title',)
+    search_fields = ('title', 'link')
+
+admin.site.register(jobModel, jobModelAdmin)
