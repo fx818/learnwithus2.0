@@ -50,11 +50,12 @@ Contact @ LearnWithUs
         font-weight: 600;
     }
 
-    textarea{
+    textarea {
         padding: 1vw;
         margin: 0;
     }
-    .head-text{
+
+    .head-text {
         text-align: center;
         margin-top: 3vw;
         margin-bottom: -2rem;
@@ -87,15 +88,12 @@ Contact @ LearnWithUs
 
         {% csrf_token %}
 
-        <!-- <input type="hidden" name="access_key" value="05372b54-930b-4bb7-9a8b-6f5290e9d83e"> -->
-        <input name="name" type="text" placeholder="Your Full name">
-        <input name="college" type="text" placeholder="Your college name">
-        <input name="mobile" type="number" placeholder="Type your phone number">
-        <input name="email" type="email" placeholder="Type you email address">
-        <!-- <input name="question" type="text" placeholder="write you whole query here !"> -->
-        <!-- <input name="question" type="text" placeholder="write you whole query here !"> -->
-        <br>
-        <textarea name="question" id="" cols="25" rows="6">Write you whole query here !</textarea>
+        {% for form in forms %}
+        <div>
+            {{form}}
+        </div>
+        {% endfor %}
+
 
         <input style="color: white;" class="submit" type="submit" value="Submit Now">
 

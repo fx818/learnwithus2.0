@@ -12,7 +12,6 @@ Opportunities @ LearnWithUs
 {% block style %}
 
 <style>
-
     /* section{ */
     /* width: 102vw; */
     /* margin-left: -1vw; */
@@ -251,72 +250,31 @@ Opportunities @ LearnWithUs
     <!-- Internship Section -->
     <section>
         <div class="heading-data">
-            <h2>Internships</h2>
+            <h2>Dynamic Internships</h2>
         </div>
+        {% if user.is_superuser %}
+        <a href="internshipupdatesatlearnwithus">Update Internships</a>
+        {% endif %}
 
         <div class="all-interships">
 
+            {% for internship in internships %}
+
             <div class="internship-detail">
-                <h3>Intern- Machine Learning (Gen AI)</h3>
-                <img src="{% static 'oppimages/MLSeagate.png' %}" alt="">
+                <h3>{{internship.title}}</h3>
+                <img src="{{internship.image.url}}" alt="">
                 <p>
-                    Our organization specializes in Global Data Analytics and provides comprehensive solutions for
-                    Big data, Generative-AI, and MLOps frameworks and deployments. <a
-                        href="https://seagatecareers.com/job/Pune-Intern-Machine-Learning-%28Gen-AI%29/1126888400/?feedId=325900&utm_source=Indeed&utm_campaign=Seagate_Indeed"
-                        target="_blank">Learn More</a>
+                    {{internship.desc}} 
+                    <a
+                        href="{{internship.link}}"
+                        target="_blank">
+                        Learn More
+                    </a>
 
                 </p>
             </div>
 
-
-            <div class="internship-detail">
-                <h3>CodeHers 2024 by Walmart Global Tech India</h3>
-                <img src="{% static 'oppimages/codehers.jpg' %}" alt="">
-                <p>
-                    CodeHers 2024 is open to female students across all engineering colleges in India who are
-                    pursuing their studies in ECE, EE, EEE, IT, CS. <a
-                        href="https://unstop.com/o/nw35Y0j?lb=U0LFWXD&utm_medium=Share&utm_source=shortUrl"
-                        target="_blank">Learn More</a>
-
-                </p>
-            </div>
-
-
-            <div class="internship-detail">
-                <h3>Flipkart Runway: Season 4</h3>
-                <img src="{% static 'oppimages/flipkartRunway.png' %}" alt="">
-                <p>
-                    Introducing Season 4 of Flipkart Runway, an Early Career Program for Women Engineers, designed
-                    exclusively to offer them a fast-tracked journey toward a thriving career in technology. <a
-                        href="https://unstop.com/competitions/flipkart-runway-season-4-flipkart-901610?ref=HMFTRD"
-                        target="_blank">Learn
-                        More</a>
-
-                </p>
-            </div>
-
-            <div class="internship-detail">
-                <h3>Summer Research Interniship Program 2024</h3>
-                <img src="{% static 'oppimages/srip.png' %}" alt="">
-                <p>
-                    Students pursuing a bachelor’s or master’s degree are eligible to apply for this with a duration
-                    period of 8 weeks. <a href="https://srip.iitgn.ac.in/info/" target="_blank">Learn More</a>
-
-                </p>
-            </div>
-
-            <div class="internship-detail">
-                <h3>LinkedIn CoachIn Program 2024</h3>
-                <img src="{% static 'oppimages/LinkedIn-coachin.png' %}" alt="">
-                <p>
-                    🚀 Unlock Your Potential with LinkedIn’s CoachIn Program 2024: Empowering Women in Tech. <a
-                        href="https://linkedincoachinprogram-season5.splashthat.com/" target="_blank">Learn More</a>
-
-                </p>
-            </div>
-
-
-
+            {% endfor %}
 
         </div>
 
@@ -327,52 +285,27 @@ Opportunities @ LearnWithUs
     <br>
 
     <!-- Hackathons and Competition Section -->
+    <!-- competetionupdatesatlearnwithus -->
     <section>
         <div class="heading-data">
             <h2>Hackathons/Competitions</h2>
         </div>
+        {% if user.is_superuser %}
+        <a href="competetionupdatesatlearnwithus">Update Competetions</a>
+        {% endif %}
 
         <div class="all-interships">
 
-
+            {% for competetion in competetions %}
             <div class="internship-detail">
-                <h3>Web Hackthon @ LearnWithUs</h3>
-                <img src="{% static 'oppimages/hackathonlearnwithus.png' %}" alt="">
+                <h3>{{competetion.title}}</h3>
+                <img src="{{competetion.image.url}}" alt="">
                 <p>
-                    LearnWithUs is organising a Web development Hackthon for various college students. Every 1st
-                    year and 2nd year students are eligible to participate in this. Participate and win many <b>Cash
-                        Prizes</b> <a href="hackathon">Register Now</a>
-
+                    {{competetion.desc}}
+                    <a href="{{competetion.link}}">Register Now</a>
                 </p>
             </div>
-
-
-            <div class="internship-detail">
-                <h3>GenAI Hackathon APAC Edition</h3>
-                <img src="{% static 'oppimages/genai.png' %}" alt="">
-                <p>
-                    The GenAI Hackathon is your chance to revolutionise AI solutions. Let your imagination soar as
-                    you reshape industries, and solve critical problems with the power of AI. <a
-                        href="https://hack2skill.com/genai_hackathon_apac_edition#">Learn More</a>
-
-                </p>
-            </div>
-
-
-            <div class="internship-detail">
-                <h3>NationBuilding Case Study Competition</h3>
-                <img src="{% static 'oppimages/nationBuilding.png' %}" alt="">
-                <p>
-                    NationBuilding, is an annual event designed to engage the youth in the nation-building process
-                    by working on some of the most pressing issues facing India. Participants will dive into a
-                    2-month extravaganza across multiple online and offline rounds. <a
-                        href="https://unstop.com/competitions/nationbuilding-case-study-competition-nation-with-namo-882518?ref=HMFTRD">Learn
-                        More</a>
-
-                </p>
-            </div>
-
-
+            {% endfor %}
 
 
         </div>

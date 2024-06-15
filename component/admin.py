@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Registration,techblogs,OTP,verifiedEmail
+from .models import Registration,techblogs,OTP,verifiedEmail, ContactModel, hackathonRegModel, InternshipModel, CompetetionModel
 # Register your models here.
 admin.site.register(Registration)
 
@@ -37,3 +37,34 @@ admin.site.register(techblogs,techblogsAdmin)
 
 admin.site.register(OTP)
 admin.site.register(verifiedEmail)
+
+
+class ContactModelAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'question','college')
+    list_filter = ('email',)
+    search_fields = ('name', 'email')
+
+admin.site.register(ContactModel, ContactModelAdmin)
+
+
+class hackathonModelAdmin(admin.ModelAdmin):
+    list_display = ('team', 'college', 'year','branch')
+    list_filter = ('year','branch','college')
+    search_fields = ('team', 'college')
+
+admin.site.register(hackathonRegModel, hackathonModelAdmin)
+
+
+class InternshipModelAdmin(admin.ModelAdmin):
+    list_display = ('title', 'link', 'desc')
+    list_filter = ('title',)
+    search_fields = ('title', 'link')
+
+admin.site.register(InternshipModel, InternshipModelAdmin)
+
+class CompetetionModelAdmin(admin.ModelAdmin):
+    list_display = ('title', 'link', 'desc')
+    list_filter = ('title',)
+    search_fields = ('title', 'link')
+
+admin.site.register(CompetetionModel, CompetetionModelAdmin)

@@ -115,18 +115,9 @@ Hackathon @ LearnWithUs
 
         {% csrf_token %}
 
-        <!-- <input type="hidden" name="access_key" value="05372b54-930b-4bb7-9a8b-6f5290e9d83e"> -->
-        <input name="team" type="text" placeholder="Your team name">
-        <input name="college" type="text" placeholder="Your college name">
-        <input name="lead" type="text" placeholder="Lead Name">
-        <input name="leadmobile" type="number" placeholder="Lead Phone number">
-        <input name="leadmail" type="email" placeholder="Lead Email Address">
-        <input name="mem2" type="text" placeholder="Member 2 name">
-        <input name="m2mobile" type="number" placeholder="Member 2 Phone number">
-        <input name="mem3" type="text" placeholder="Member 3 name">
-        <input name="m3mobile" type="number" placeholder="Member 3 Phone number">
-        <input name="year" type="text" placeholder="Your current year">
-        <input name="branch" type="text" placeholder="Your branch">
+        {% for form in forms %}
+        {{form}}
+        {% endfor %}
 
         <input style="color: white;" class="submit" type="submit" value="Submit Now">
 

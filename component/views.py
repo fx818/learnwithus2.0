@@ -4,9 +4,10 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Registration,techblogs
+from .models import Registration,techblogs, verifiedEmail, InternshipModel, CompetetionModel
 from .utils import generate_otp, sendingmail
 from .models import OTP
+from .forms import hackathonRegForm, internshupUpdateForm, contactForm,competetionUpdateForm
 
 
 import psycopg2
@@ -116,7 +117,6 @@ def verifyotp(request):
     
     return render(request, 'component/verifyotp.html')
 
-from .models import verifiedEmail
 def finalregister(request):
     useremail = request.session.get('useremail')
     print("User email from session is: ",useremail)
@@ -292,50 +292,85 @@ def techblog(request):
         })
 
 
-
 def hackathon(request):
-
     if request.method == 'POST':
-        connection = psycopg2.connect(**db_config)
-        cursor = connection.cursor()
+        form = hackathonRegForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request,'msg.html')
+        else:
+            return render(request,'hackathon.html',{'forms':form})
 
-        # Collecting the data from the form
-        team = request.POST['team']
-        college = request.POST['college']
-        lead = request.POST['lead']
-        leadmobile = request.POST['leadmobile']
-        leadmail = request.POST['leadmail']
-        mem2 = request.POST['mem2']
-        m2mobile = request.POST['m2mobile']
-        mem3 = request.POST['mem3']
-        m3mobile = request.POST['m3mobile']
-        year = request.POST['year']
-        branch = request.POST['branch']
+    else:
+        form = hackathonRegForm()
+    return render(request,'hackathon.html',{'forms':form})
 
-        values = (team,college,lead,leadmobile,leadmail,mem2,m2mobile,mem3,m3mobile,year,branch)
+@login_required
+def internshipupdatesatlearnwithus(request):
+    user = request.user
+    print(user.is_superuser)
+    if request.method == 'POST':
+        form = internshupUpdateForm(request.POST, request.FILES)  # Add request.FILES to handle file uploads
+        if form.is_valid():
+            form.save()
+            return render(
+                request,
+                'component/internshipupdates.html',
+                {'msg':'Updated succesfully',
+                 'forms':form
+                }
+            )
+        else:
+            return render(request,
+                          'component/internshipupdates.html',
+                          {'msg':'Form is not valid',
+                           'forms':form
+                           }
+                        )
+    else:
+        form = internshupUpdateForm()
+    return render(request,'component/internshipupdates.html',{'forms':form})
+    
 
-        try:
-            query = "insert into hackathon24 values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);"
-            cursor.execute(query,values)
-            connection.commit()
-        except:
-            err = {
-                'error':"Something went wrong please check again or try again later"
-            }
-            return render(request,'hackathon.html',err)
 
 
+@login_required
+def competetionupdatesatlearnwithus(request):
+    user = request.user
+    print(user.is_superuser)
+    if request.method == 'POST':
+        form = competetionUpdateForm(request.POST, request.FILES)  # Add request.FILES to handle file uploads
+        if form.is_valid():
+            form.save()
+            return render(
+                request,
+                'component/competetionupdates.html',
+                {'msg':'Updated succesfully',
+                 'forms':form
+                }
+            )
+        else:
+            return render(request,
+                          'component/competetionupdates.html',
+                          {'msg':'Form is not valid',
+                           'forms':form
+                           }
+                        )
+    else:
+        form = competetionUpdateForm()
+    return render(request,'component/competetionupdates.html',{'forms':form})
+    
 
-        return render(request,'msg.html')
-    global universal_username
-    user_data = {
-        'username' : universal_username[0]
-    }
-    return render(request,'hackathon.html',user_data)
+
 
 
 def opportunities(request):
-    return render(request,'opportunities.html')
+    internships = InternshipModel.objects.all()
+    competetion = CompetetionModel.objects.all()
+    return render(request,'opportunities.html',
+                  {'internships':internships,
+                   'competetions':competetion}
+                  )
 
 def githubblog(request):
     return render(request,'allblogs/explore-github.html')
@@ -400,41 +435,16 @@ def about(request):
 def copyright(request):
     return render(request,'copyright.html')
 
+
 def contact(request):
     if request.method == 'POST':
-
-        connection = psycopg2.connect(**db_config)
-        cursor = connection.cursor()
-
-        name = request.POST['name']
-        college = request.POST['college']
-        mobile = request.POST['mobile']
-        email = request.POST['email']
-        question = request.POST['question']
-        values = (name,college,mobile,email,question)
-
-        if len(name)==0 or len(mobile)==0 or len(email)==0:
-            err_msg = {
-                'error':'Sorry could not submit the data. Some error occured ! Please fill the form correctly !'
-            }
-            return render(request,'contact.html',err_msg)
-
-        try:
-            # if len(name)==0 or len(mobile)==0 or len(email)==0 or len(question)==0:
-            query = "insert into query values(%s,%s,%s,%s,%s);"
-            cursor.execute(query,values)
-            connection.commit()
-
-        except:
-            err_msg = {
-                'error':'Sorry could not submit the data. Some error occured !'
-            }
-            return render(request,'contact.html',err_msg)
-
-        return render(request,'msg.html')
-
-
-    return render(request,'contact.html')
+        form = contactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('msg') 
+    else:
+        form = contactForm()
+    return render(request,'contact.html',{'forms':form})
 
 
 

@@ -30,7 +30,8 @@ class CustomUser(AbstractUser):
     groups = models.ManyToManyField(Group, related_name='customuser_set', blank=True)
     user_permissions = models.ManyToManyField(Permission, related_name='customuser_set', blank=True)
 
-
+    class Meta:
+        verbose_name_plural = "Registered Users"
 
 
 from django.contrib.auth import get_user_model
@@ -66,3 +67,55 @@ class OTP(models.Model):
 class verifiedEmail(models.Model):
     email = models.CharField(max_length=250)
     isVerified = models.BooleanField()
+
+    class Meta:
+        verbose_name_plural = "Manual Email Verifications"
+
+
+
+class ContactModel(models.Model):
+    name = models.CharField(max_length=150)
+    college = models.CharField(max_length=150)
+    mobile = models.CharField(max_length=15)
+    email = models.CharField(max_length=150)
+    question = models.CharField(max_length=1000)
+
+    class Meta:
+        verbose_name_plural = "Queries"
+
+
+class hackathonRegModel(models.Model):
+    # team,college,lead,leadmobile,leadmail,mem2,m2mobile,mem3,m3mobile,year,branch
+    team = models.CharField(max_length=150)
+    college = models.CharField(max_length=150)
+    lead = models.CharField(max_length=150)
+    leadmobile = models.IntegerField()
+    leadmail = models.CharField(max_length=150)
+    mem2 = models.CharField(max_length=150)
+    m2mobile = models.IntegerField()
+    mem3 = models.CharField(max_length=150)
+    m3mobile = models.IntegerField()
+    year = models.CharField(max_length=50)
+    branch = models.CharField(max_length=150)
+
+    class Meta:
+        verbose_name_plural = "Hackathon Registrations"
+
+class InternshipModel(models.Model):
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='opportunities/internships', null=True, blank=True)
+    desc = models.CharField(max_length=1000)
+    link = models.CharField(max_length=250)
+
+    class Meta:
+        verbose_name_plural = 'Internship Data'
+
+
+class CompetetionModel(models.Model):
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='opportunities/competetion', null=True, blank=True)
+    desc = models.CharField(max_length=1000)
+    link = models.CharField(max_length=250)
+
+    class Meta:
+        verbose_name_plural = 'Hackathon and Competetion Data'
