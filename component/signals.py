@@ -24,7 +24,6 @@ def send_registration_email(sender, instance, created, **kwargs):
 
 
 
-
 from allauth.account.signals import user_signed_up
 from allauth.socialaccount.models import SocialAccount
 from django.dispatch import receiver

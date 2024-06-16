@@ -71,8 +71,12 @@ def login(request):
 def emailotp(request):
     if request.method == 'POST':
         useremail = request.POST['email']
-        otp = generate_otp()
         
+        if verifiedEmail.objects.filter(email=useremail).exists():
+            messages.info(request,"Email already exists. Please use another email")
+            return render(request,'component/emailotp.html')
+
+        otp = generate_otp()
         # Save OTP to the database
         OTP.objects.create(useremail=useremail, otp=otp)
 
@@ -93,8 +97,6 @@ def emailotp(request):
         return redirect('verifyotp')
     
     return render(request, 'component/emailotp.html')
-
-
 
 
 def verifyotp(request):
@@ -595,30 +597,7 @@ def news(request):
     return render(request,'news.html',data_to_send)
 
 
-
-
-
-
-# connection = psycopg2.connect(**db_config)
-# cursor = connection.cursor()
-# query = "select rank from \"profile\";"
-# cursor.execute(query)
-
-# sql_query = "SELECT * FROM \"user\" where username = 'edith27401';"
-# cursor.execute(sql_query)
-
-# rows = cursor.fetchall()
-# res = rows
-# print(res[0][0])
-
-
-# random
-
 def logout_view(request):
     logout(request)
     return redirect("home")
 
-    
-# def profile_page(request):
-#     return render(request,'profile_page.html')
-    

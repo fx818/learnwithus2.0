@@ -1,4 +1,3 @@
-
 from django import forms
 from .models import ContactModel, hackathonRegModel,InternshipModel,CompetetionModel, scholarshipModel, jobModel
 class contactForm(forms.ModelForm):
