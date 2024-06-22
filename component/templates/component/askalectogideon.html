@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alecto Gideon</title>
+    <link rel="icon" href="{% static 'images/alecto.png'  %}">
+    <link rel="stylesheet" href="{% static 'css/askalectogideon.css' %}">
+
+</head>
+
+<body>
+
+
+    {% if user.is_authenticated %}
+
+    <div style="display: flex; justify-content: center; align-items: center; place-items: center; column-gap: 1rem;">
+        <h1>
+            Ask - Alecto Gideon (AG)
+        </h1>
+        <img src="{% static 'images/alecto.png'  %}" alt="" style="height: 4rem;">
+    </div>
+    <form action="askalectogideon" method="POST">
+        {% csrf_token %}
+
+        <!-- <input type="text" name="username" placeholder="Username"> <br> <br> -->
+        <textarea name="query" rows="10">Write your query here...</textarea>
+        <br>
+        <input type="submit" value="Ask AG 🚀" class="askbutton">
+    </form>
+    {% for i in all_data %}
+    <div class="query-container">
+        <h2>You asked: {{ i.0 }}</h2>
+        <p>
+            {% for j in i.1 %}
+            {{ j }}<br>
+            {% endfor %}
+        </p>
+    </div>
+    {% endfor %}
+
+
+
+    {% else %}
+
+    <h2>Sorry, you are not logged in <br> You need to be logged in for accessing this page <br> <a href="userlogin">Login now</a></h2>
+
+    {% endif %}
+
+    <a href="../home">
+        <img src="{% static 'images/logo4.png' %}" alt="" style="position: fixed; bottom: 1rem; right: 1rem; height: 6rem;">
+    </a>
+
+
+</body>
+
+</html>

@@ -39,7 +39,7 @@ class hackathonRegForm(forms.ModelForm):
             'branch':'Branch',
         }
         widgets = {
-            'team': forms.TextInput(attrs={'placeholder': 'Enter your name'}),
+            'team': forms.TextInput(attrs={'placeholder': f"Enter your name"}),
             'college': forms.TextInput(attrs={'placeholder': 'Enter your college name'}),
             'lead': forms.TextInput(attrs={'placeholder': 'Enter your lead name'}),
             'leadmobile': forms.TextInput(attrs={'placeholder': 'Enter lead\'s mobile'}),

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Registration,techblogs,OTP,verifiedEmail, ContactModel, hackathonRegModel, InternshipModel, CompetetionModel, scholarshipModel, jobModel
+from .models import Registration,techblogs,OTP,verifiedEmail, ContactModel, hackathonRegModel, InternshipModel, CompetetionModel, scholarshipModel, jobModel, UserActivity, userChatWithAI
 # Register your models here.
 admin.site.register(Registration)
 
@@ -37,6 +37,7 @@ admin.site.register(techblogs,techblogsAdmin)
 
 admin.site.register(OTP)
 admin.site.register(verifiedEmail)
+admin.site.register(UserActivity)
 
 
 class ContactModelAdmin(admin.ModelAdmin):
@@ -82,3 +83,5 @@ class jobModelAdmin(admin.ModelAdmin):
     search_fields = ('title', 'link')
 
 admin.site.register(jobModel, jobModelAdmin)
+
+admin.site.register(userChatWithAI)

@@ -32,7 +32,13 @@ class CustomUser(AbstractUser):
 
     class Meta:
         verbose_name_plural = "Registered Users"
+        
 
+class UserActivity(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    path = models.CharField(max_length=1000)
+    class Meta:
+        verbose_name_plural = "User Activity"
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -137,3 +143,15 @@ class jobModel(models.Model):
 
     class Meta:
         verbose_name_plural = 'Opp-Job Data'
+        
+
+class userChatWithAI(models.Model):
+    user = models.CharField(max_length=100)
+    query = models.TextField()
+    response = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return str(self.user) + ' ' + str(self.date)
+    
+    

@@ -14,7 +14,6 @@ News @ LearnWithUs
 
 {% block content %}
 
-{% if user.is_authenticated %}
 
 <h2>News section</h2>
 
@@ -35,13 +34,5 @@ News @ LearnWithUs
 {% endif %}
 {% endfor %}
 
-{% else %}
-
-<h3>Login to see news</h3>
-<a href="login">
-    Login Now
-</a>
-
-{% endif %}
 
 {% endblock %}

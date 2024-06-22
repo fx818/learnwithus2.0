@@ -4,8 +4,8 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Registration,techblogs, verifiedEmail, InternshipModel, CompetetionModel, scholarshipModel, jobModel
-from .utils import generate_otp, sendingmail
+from .models import Registration,techblogs, verifiedEmail, InternshipModel, CompetetionModel, scholarshipModel, jobModel, UserActivity, userChatWithAI
+from .utils import generate_otp, sendingmail, results
 from .models import OTP
 from .forms import hackathonRegForm, internshupUpdateForm, contactForm,competetionUpdateForm,scholarshipUpdateForm, jobUpdateForm
 
@@ -44,7 +44,7 @@ def logout(request):
 
 
 # Login
-def login(request):
+def userlogin(request):
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password1']
@@ -58,7 +58,7 @@ def login(request):
             return redirect('home')
         else:
             messages.info(request,'Invalid credentials')
-            return redirect('login')
+            return redirect('userlogin')
         
     else:
         return render(request,'index.html')
@@ -192,6 +192,60 @@ def finalregister(request):
         return redirect('home')
 
     return render(request,'component/finalregister.html')
+
+@login_required
+def edit_your_profile(request):
+    User = get_user_model()
+    user = request.user
+    if request.method == 'POST':    
+        name = request.POST['fullname']
+        newusername = request.POST['username']
+        newfirst_name = name.split(' ')[0]
+        newlast_name = name.split(' ')[1]
+        newgender = request.POST['gender']
+        newprofile_pic = request.FILES.get('profile_pic')
+
+        # newskills = request.POST['skills']
+        newcountry = request.POST['country']
+        newlinkedin = request.POST['linkedin']
+        newactivitypoint = 0
+
+        try:
+            image = request.FILES['profile_pic']
+        except:
+            image = user.profile_pic
+        
+        newskill1 = request.POST['skill1']
+        newskill2 = request.POST['skill2']
+        newskill3 = request.POST['skill3']
+
+        if newusername != user.username:
+            if User.objects.filter(username=newusername).exists():
+                messages.error(request, 'Username already exists.')
+                return render(request, 'component/edit_your_profile.html')
+        
+        
+        newUser = User.objects.filter(username = user.username)
+        try:
+            for i in newUser:
+                i.username = newusername
+                i.first_name = newfirst_name
+                i.last_name = newlast_name
+                i.gender = newgender
+                i.profile_pic = newprofile_pic
+                i.country = newcountry
+                i.skill1=newskill1
+                i.skill2=newskill2
+                i.skill3=newskill3
+                i.linkedin = newlinkedin
+                i.profile_pic = image
+                i.save()
+                print("Updated the user data")
+        except:
+            print("Pakka idhar hi error hai bhai")
+        return redirect('profile_page')
+    # print(user.username)
+    return render(request,'component/edit_your_profile.html')
 
 
 
@@ -518,7 +572,14 @@ def contact(request):
 # @login_required
 def profile_page(request):
     user = request.user
-    return render(request, 'profile_page.html')
+    activities = UserActivity.objects.filter(user=user.pk)
+    activities = activities[::-1][:7]
+    # print(activities)
+    for activity in activities:
+        print(activity.path)
+    return render(request, 'profile_page.html',{'activities':activities})
+
+
 
 def notespedia(request):
     opportunities_for_fresher= ['Web Developer', 'App Developer' , 'Software Engineer', 'iOS Engineer', 'AI Developer', 'NLP Engineer', 'Data Scientist','Data Analyst', 'Data Engineer', 'Course Engineer']
@@ -600,4 +661,30 @@ def news(request):
 def logout_view(request):
     logout(request)
     return redirect("home")
+
+def askalectogideon(request):
+    import ast
+    username = request.user.username
+    if request.method == 'POST':
+        query = request.POST['query']
+        # username = request.POST['username']
+        output = results(query)
+        output = output.split('\n')
+        output = [x for x in output if x != 2]
+        data = userChatWithAI.objects.create(user=username, query=query, response=output)
+        data.save()
+        all_data = userChatWithAI.objects.filter(user=username)
+        all_data = all_data[::-1]
+        str_list = all_data[0].response
+        list_data = ast.literal_eval(str_list)
+        data_output = []
+        for i in all_data:
+            data_output.append([i.query,ast.literal_eval(i.response)])
+        return render(request, 'component/askalectogideon.html', {'all_data': data_output,'currentoutput':output})
+    all_data = userChatWithAI.objects.filter(user=username)
+    all_data = all_data[::-1]
+    data_output = []
+    for i in all_data:
+        data_output.append([i.query,ast.literal_eval(i.response)])
+    return render(request, 'component/askalectogideon.html',{'all_data': data_output})
 

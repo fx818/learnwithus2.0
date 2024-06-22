@@ -66,7 +66,7 @@ Your Profile @ LearnWithUs
             </div>
             <div class="edit_profile">
                 <button class="edit_profile_button">
-                    <a href="#" class="edit_profile_text">Edit Profile</a>
+                    <a href="profile_page/edit_your_profile" class="edit_profile_text">Edit Profile</a>
                 </button>
         </div>
         <!-- <div style="width: 24rem; height: 0.2rem; background-color: #16213E; position: relative;top:-0.5rem; left: 1.5rem;"></div> -->
@@ -109,10 +109,10 @@ Your Profile @ LearnWithUs
         <div class="horizontal_line"></div>
         <div class="recent_activity_section">
             <h2 class="recent_activity_heading">Recent Activity :</h2>
-            <ul class="recent_activity_items">{{activity_1}}</ul>
-            <ul class="recent_activity_items">{{activity_2}}</ul>
-            <ul class="recent_activity_items">{{activity_3}}</ul>
-            <p><a href="#" class="recent_activity_show_more">Show more..</a></p>
+            
+            {% for activity in activities %}
+            <ul class="recent_activity_items" style="overflow-x: auto;">You visited : {{ activity.path }}</ul>
+            {% endfor %}
         </div>
         </form>
     </div>
@@ -201,7 +201,7 @@ Your Profile @ LearnWithUs
         </p>
 
         <p class="login-link">
-            <a href="login">Login Now</a>
+            <a href="userlogin">Login Now</a>
             <br> <br><br>
             <a href="emailotp">Create an Account</a>
         </p>

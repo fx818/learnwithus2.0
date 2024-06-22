@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Profile | LearnWithUs
+{% endblock %}
+
+{% block linkcss %}
+<link rel="stylesheet" href="{% static 'css/profile_page.css' %}">
+<link rel="stylesheet" href="{% static 'css/loginerror.css' %}">
+{% endblock %}
+
+{% block style %}
+
+<style>
+    input{
+        border: 1px solid gray;
+        padding: .1rem .5rem;
+        margin-top: .1rem;
+        font-size: 1rem;
+    }
+    #submitbutton{
+        background-color: transparent;
+        border: none;
+        color: white;
+        font-weight: 900;
+    }
+    .profile_main .profile_photo {
+        /* aspect-ratio: 1 !important; */
+        height: 6vw;
+        /* aspect-ratio: ; */
+        width: auto !important;
+    }
+
+    .profile_main {
+        justify-content: center;
+        place-content: center;
+        align-items: center;
+    }
+
+    .profile_right {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        place-content: center;
+        align-items: center;
+        place-items: center;
+    }
+</style>
+{% endblock %}
+
+
+{% block heading %}
+Your Profile @ LearnWithUs
+{% endblock %}
+
+{% block content %}
+
+
+{% if user.is_authenticated %}
+<form action="edit_your_profile" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% if messages %}
+    {% for message in messages %}
+    {{message}}
+    {% endfor %}
+    {% endif %}
+    <div class="main">
+        <div class="left">
+            <div class="profile_main">
+                {% if user.profile_pic.url is not None %}
+                <div
+                    style="display: grid; grid-template-columns: 1fr; justify-content: center; align-content: center; place-content: center; place-items: center; row-gap: 2vh;">
+                    <img src="{{user.profile_pic.url}}" alt="" class="profile_photo" id="dp">
+                    <input type="file" style="color: rgba(255, 0, 0, 0); padding-right: 0; margin-right: -8.8rem; background-color: rgba(143, 143, 143, 0); border: none;"
+                        name="profile_pic">
+                </div>
+                {% else %}
+                <div
+                    style="display: grid; grid-template-columns: 1fr; justify-content: center; align-content: center; place-content: center; place-items: center; row-gap: 2vh;">
+                    <img src="{% static 'images/default_male_pic.png'%}" alt="" class="profile_photo" id="dp">
+                    <input type="file" style="color: rgba(255, 0, 0, 0); padding-right: 0; margin-right: -8.8rem; background-color: rgba(143, 143, 143, 0); border: none;"
+                        name="profile_pic">
+                </div>
+                {% endif %}
+
+                <div class="profile_right">
+                    <p class="name"><b>
+                            <input type="text" name="fullname" value="{{user.first_name}} {{user.last_name}}">
+                        </b> <br> <span style="margin-left: .1rem;">
+                            <input type="text" name="" id="" value="{{user.country}}"></span> </p>
+                    <p class="rank"><b>Rank : <input type="text" name="rank" value="{{rank}} You can't edit your rank"
+                                readonly></b></p>
+                </div>
+
+            </div>
+            <div class="edit_profile">
+                <button class="edit_profile_button">
+                    <a href="#" class="edit_profile_text">
+                        <input type="submit" value="Submit Now" id="submitbutton">
+                    </a>
+                </button>
+            </div>
+            <!-- <div style="width: 24rem; height: 0.2rem; background-color: #16213E; position: relative;top:-0.5rem; left: 1.5rem;"></div> -->
+            <div class="horizontal_line"></div>
+            <div class="community_stats">
+                <h2 class="community_heading">Community Stats :</h2>
+                <div class="community_container">
+                    <ul class="community_items">
+                        <img src="{% static 'images/profile_doubts.png'%}" alt="" class="community_logo">
+                        <p class="community_texts">Doubts :</p>
+                    </ul>
+                    <ul class="community_items">
+                        <img src="{% static 'images/profile_solutions.png'%}" alt="" class="community_logo">
+                        <p class="community_texts">Solutions</p>
+                    </ul>
+                    <ul class="community_items">
+                        <img src="{% static 'images/profile_discussions.png'%}" alt="" class="community_logo">
+                        <p class="community_texts">Discussions</p>
+                    </ul>
+                </div>
+            </div>
+            <div class="horizontal_line"></div>
+            <div class="skills_section">
+                <h2 class="skills_heading">Skills :</h2>
+                <div class="skills_container">
+                    <ul class="skills_items">
+                        <img src="{% static 'images/skills_python.png'%}" alt="" class="skills_logo">
+                        <p class="skills_text">
+                            <input type="text" name="skill2" value="{{user.skill2}}">
+                        </p>
+                    </ul>
+                    <ul class="skills_items">
+                        <img src="{%static 'images/skills_c++.png'%}" alt="" class="skills_logo">
+                        <p class="skills_text">
+                            <input type="text" name="skill1" value="{{user.skill1}}">
+                        </p>
+                    </ul>
+                    <ul class="skills_items">
+                        <img src="{% static 'images/skills_database.png'%}" alt="" class="skills_logo">
+                        <p class="skills_text">
+                            <input type="text" name="skill3" value="{{user.skill3}}">
+                        </p>
+                    </ul>
+                </div>
+            </div>
+            <div class="horizontal_line"></div>
+
+        </div>
+        <div class="right">
+            <div class="profile_other_container">
+                <section>
+                    <h2 class="about_profile_heading">About Profile</h2>
+                    <section class="about_profile">
+
+                        <ul class="about_profile_items"><b>Username</b> :
+                            <input type="text" name="username" value="{{user.username}}">
+                        </ul>
+                        <div class="horizontal_line"></div>
+                        <ul class="about_profile_items"><b>Country</b> :
+                            <input type="text" value="{{user.country}}" name="country">
+                        </ul>
+                        <div class="horizontal_line"></div>
+                        <ul class="about_profile_items"><b>Gender</b> :
+                            <input type="text" name="gender" value="{{user.gender}}">
+                        </ul>
+                        <div class="horizontal_line"></div>
+                        <ul class="about_profile_items"><b>LinkedIn</b> :
+                            <input type="text" name="linkedin" value="{{user.linkedin}}">
+
+                        </ul>
+                        <div class="horizontal_line"></div>
+                        <ul class="about_profile_items"><b>Activity Points</b> :
+                            <input type="text" name="activitypoint" value="{{user.activitypoint}} (You can't edit your points)" readonly>
+                        </ul>
+                    </section>
+                </section>
+                <section>
+                    <h2 class="activity_points_heading">Activity Points</h2>
+                    <section class="activity_points">
+
+                    </section>
+                </section>
+
+            </div>
+            <div class="activity_map">
+                <h2 class="activity_map_heading">Activity Map</h2>
+                <div class="activity_map_graph">
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</form>
+
+{% else %}
+
+
+<center>
+
+    <div class="container">
+        <p class="login-para">
+            You need to login first in order to access your profile page !
+        </p>
+
+        <p class="login-link">
+            <a href="login">Login Now</a>
+            <br> <br><br>
+            <a href="emailotp">Create an Account</a>
+        </p>
+
+    </div>
+
+</center>
+
+
+
+{% endif %}
+
+{% endblock %}
