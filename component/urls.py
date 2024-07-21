@@ -7,7 +7,7 @@ urlpatterns = [
     path('home',views.home,name = 'home'),
     path('techblog',views.techblog,name = 'techblog'),
     path('hackathon',views.hackathon,name = 'hackathon'),
-    path('opportunities',views.opportunities,name = 'opportunities'),
+
     path('techblog/githubblog/',views.githubblog,name = 'githubblog'),
     path('emailotp',views.emailotp,name = 'emailotp'),
     path('verifyotp',views.verifyotp,name = 'verifyotp'),
@@ -27,10 +27,7 @@ urlpatterns = [
     path("cse",views.cse,name='cse'),
     path("et",views.et,name='et'),
     path("notespedia",views.notespedia,name='notespedia'),
-    path("internshipupdatesatlearnwithus",views.internshipupdatesatlearnwithus,name='internshipupdatesatlearnwithus'),
-    path("competetionupdatesatlearnwithus",views.competetionupdatesatlearnwithus,name='competetionupdatesatlearnwithus'),
-    path("scholarshipupdatesatlearnwithus",views.scholarshipupdatesatlearnwithus,name='scholarshipupdatesatlearnwithus'),
-    path("jobupdatesatlearnwithus",views.jobupdatesatlearnwithus,name='jobupdatesatlearnwithus'),
+    
     path("team",views.team, name= "team"),
     path("terms_and_conditions",views.terms_and_conditions, name= "terms_and_conditions"),
     path('C',views.C,name = 'C'),
@@ -40,5 +37,4 @@ urlpatterns = [
     path('soon',views.soon,name = 'soon'),
     path('news',views.news,name = 'news'),
     path('writetechblog',views.writetechblog,name = 'writetechblog'),
-    path('learnwithusai/askalectogideon',views.askalectogideon,name = 'askalectogideon'),
 ]

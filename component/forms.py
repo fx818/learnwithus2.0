@@ -1,5 +1,5 @@
 from django import forms
-from .models import ContactModel, hackathonRegModel,InternshipModel,CompetetionModel, scholarshipModel, jobModel
+from .models import ContactModel, hackathonRegModel
 class contactForm(forms.ModelForm):
     class Meta:
         model = ContactModel
@@ -50,68 +50,4 @@ class hackathonRegForm(forms.ModelForm):
             'm3mobile': forms.TextInput(attrs={'placeholder': 'Enter member 3 mobile'}),
             'year': forms.TextInput(attrs={'placeholder': 'Enter your year'}),
             'branch': forms.TextInput(attrs={'placeholder': 'Enter your branch'}),
-        }
-
-class internshupUpdateForm(forms.ModelForm):
-    class Meta:
-        model = InternshipModel
-        fields = '__all__'
-        labels = {
-            'title': 'Title',
-            'link': 'References',
-            'image': 'Picture',
-            'desc': 'Short description'
-        }
-        widgets = {
-            'title':forms.TextInput(attrs={'placeholder':'Enter the title'}),
-            'link':forms.TextInput(attrs={'placeholder':'Place the link here'}),
-            'desc':forms.TextInput(attrs={'placeholder':'Please write the description'}),
-        }
-
-class competetionUpdateForm(forms.ModelForm):
-    class Meta:
-        model = CompetetionModel
-        fields = '__all__'
-        labels = {
-            'title': 'Title',
-            'link': 'References',
-            'image': 'Picture',
-            'desc': 'Short description'
-        }
-        widgets = {
-            'title':forms.TextInput(attrs={'placeholder':'Enter the title'}),
-            'link':forms.TextInput(attrs={'placeholder':'Place the link here'}),
-            'desc':forms.TextInput(attrs={'placeholder':'Please write the description'}),
-        }
-
-class scholarshipUpdateForm(forms.ModelForm):
-    class Meta:
-        model = scholarshipModel
-        fields = '__all__'
-        labels = {
-            'title': 'Title',
-            'link': 'References',
-            'image': 'Picture',
-            'desc': 'Short description'
-        }
-        widgets = {
-            'title':forms.TextInput(attrs={'placeholder':'Enter the title'}),
-            'link':forms.TextInput(attrs={'placeholder':'Place the link here'}),
-            'desc':forms.TextInput(attrs={'placeholder':'Please write the description'}),
-        }
-
-class jobUpdateForm(forms.ModelForm):
-    class Meta:
-        model = jobModel
-        fields = '__all__'
-        labels = {
-            'title': 'Title',
-            'link': 'References',
-            'image': 'Picture',
-            'desc': 'Short description'
-        }
-        widgets = {
-            'title':forms.TextInput(attrs={'placeholder':'Enter the title'}),
-            'link':forms.TextInput(attrs={'placeholder':'Place the link here'}),
-            'desc':forms.TextInput(attrs={'placeholder':'Please write the description'}),
         }

@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alecto Gideon</title>
+    <link rel="icon" href="{% static 'images/alecto.png'  %}">
+    <link rel="stylesheet" href="{% static 'css/askalectogideon.css' %}">
+
+    <style>
+        .form-data {
+            position: fixed;
+            bottom: 1rem;
+            display: grid;
+            grid-template-columns: 9fr 1fr;
+            align-items: center;
+            place-content: center;
+            place-items: center;
+
+        }
+
+        .form-data input {
+            height: fit-content;
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+
+
+    {% if user.is_authenticated %}
+
+    <div style="display: flex; justify-content: center; align-items: center; place-items: center; column-gap: 1rem;">
+        <h1>
+            Ask - Alecto Gideon (AG)
+        </h1>
+        <img src="{% static 'images/alecto.png'  %}" alt="" style="height: 4rem;">
+    </div>
+
+
+    {% if not current_data %}
+    <div class="query-container"
+        style=" display: flex; justify-content: center; align-items: center; text-align: center;">
+        <h2>Sorry! <br>No search history found</h2>
+    </div>
+    {% else %}
+
+
+    <div class="query-container">
+        <h2>You asked: {{ current_data.0 }}</h2>
+
+        <p>
+            {% for data in current_data.1 %}
+            {{data}} <br>
+            {% endfor %}
+        </p>
+    </div>
+
+
+    {% endif %}
+
+
+
+
+    <form class="form-data" action="../askalectogideon/" method="POST">
+        {% csrf_token %}
+
+        <!-- <input type="text" name="username" placeholder="Username"> <br> <br> -->
+        <textarea id="autoResizeTextarea" name="query" rows="1.5">Write your query here...</textarea>
+        <input type="submit" value="Ask AG 🚀" class="askbutton">
+    </form>
+
+
+
+
+
+    {% else %}
+
+    <h2>Sorry, you are not logged in <br> You need to be logged in for accessing this page <br> <a
+            href="../userlogin">Login now</a></h2>
+
+    {% endif %}
+
+    <a href="../home">
+        <img src="{% static 'images/logo4.png' %}" alt=""
+            style="position: fixed; top: 1rem; right: 1rem; height: 6rem;">
+    </a>
+
+
+
+
+
+
+    <script>
+        function autoResizeTextarea(textarea) {
+            textarea.style.height = 'auto'; // Reset the height
+            textarea.style.height = textarea.scrollHeight + 'px'; // Set it to the scroll height
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const textarea = document.getElementById('autoResizeTextarea');
+            textarea.addEventListener('input', () => autoResizeTextarea(textarea));
+        });
+    </script>
+
+
+
+</body>
+
+</html>

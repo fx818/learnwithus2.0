@@ -4,10 +4,10 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Registration,techblogs, verifiedEmail, InternshipModel, CompetetionModel, scholarshipModel, jobModel, UserActivity, userChatWithAI
-from .utils import generate_otp, sendingmail, results
+from .models import Registration,techblogs, verifiedEmail, UserActivity
+from .utils import generate_otp, sendingmail
 from .models import OTP
-from .forms import hackathonRegForm, internshupUpdateForm, contactForm,competetionUpdateForm,scholarshipUpdateForm, jobUpdateForm
+from .forms import hackathonRegForm, contactForm
 
 
 import psycopg2
@@ -361,137 +361,6 @@ def hackathon(request):
         form = hackathonRegForm()
     return render(request,'hackathon.html',{'forms':form})
 
-@login_required
-def internshipupdatesatlearnwithus(request):
-    user = request.user
-    print(user.is_superuser)
-    if request.method == 'POST':
-        form = internshupUpdateForm(request.POST, request.FILES)  # Add request.FILES to handle file uploads
-        if form.is_valid():
-            form.save()
-            return render(
-                request,
-                'component/internshipupdates.html',
-                {'msg':'Updated succesfully',
-                 'forms':form
-                }
-            )
-        else:
-            return render(request,
-                          'component/internshipupdates.html',
-                          {'msg':'Form is not valid',
-                           'forms':form
-                           }
-                        )
-    else:
-        form = internshupUpdateForm()
-    return render(request,'component/internshipupdates.html',{'forms':form})
-    
-
-
-
-@login_required
-def competetionupdatesatlearnwithus(request):
-    user = request.user
-    print(user.is_superuser)
-    if request.method == 'POST':
-        form = competetionUpdateForm(request.POST, request.FILES)  # Add request.FILES to handle file uploads
-        if form.is_valid():
-            form.save()
-            return render(
-                request,
-                'component/competetionupdates.html',
-                {'msg':'Updated succesfully',
-                 'forms':form
-                }
-            )
-        else:
-            return render(request,
-                          'component/competetionupdates.html',
-                          {'msg':'Form is not valid',
-                           'forms':form
-                           }
-                        )
-    else:
-        form = competetionUpdateForm()
-    return render(request,'component/competetionupdates.html',{'forms':form})
-    
-
-
-
-
-
-@login_required
-def scholarshipupdatesatlearnwithus(request):
-    user = request.user
-    print(user.is_superuser)
-    if request.method == 'POST':
-        form = scholarshipUpdateForm(request.POST, request.FILES)  # Add request.FILES to handle file uploads
-        if form.is_valid():
-            form.save()
-            return render(
-                request,
-                'component/scholarshipupdates.html',
-                {'msg':'Updated succesfully',
-                 'forms':form
-                }
-            )
-        else:
-            return render(request,
-                          'component/scholarshipupdates.html',
-                          {'msg':'Form is not valid',
-                           'forms':form
-                           }
-                        )
-    else:
-        form = scholarshipUpdateForm()
-    return render(request,'component/scholarshipupdates.html',{'forms':form})
-    
-
-
-
-@login_required
-def jobupdatesatlearnwithus(request):
-    user = request.user
-    print(user.is_superuser)
-    if request.method == 'POST':
-        form = jobUpdateForm(request.POST, request.FILES)  # Add request.FILES to handle file uploads
-        if form.is_valid():
-            form.save()
-            return render(
-                request,
-                'component/jobupdates.html',
-                {'msg':'Updated succesfully',
-                 'forms':form
-                }
-            )
-        else:
-            return render(request,
-                          'component/jobupdates.html',
-                          {'msg':'Form is not valid',
-                           'forms':form
-                           }
-                        )
-    else:
-        form = jobUpdateForm()
-    return render(request,'component/jobupdates.html',{'forms':form})
-    
-
-
-
-
-def opportunities(request):
-    internships = InternshipModel.objects.all()
-    competetion = CompetetionModel.objects.all()
-    scholarship = scholarshipModel.objects.all()
-    job = jobModel.objects.all()
-    return render(request,'opportunities.html',
-                  {'internships':internships,
-                   'competetions':competetion,
-                   'scholarships':scholarship,
-                   'jobs':job
-                   }
-                  )
 
 def githubblog(request):
     return render(request,'allblogs/explore-github.html')
@@ -661,30 +530,4 @@ def news(request):
 def logout_view(request):
     logout(request)
     return redirect("home")
-
-def askalectogideon(request):
-    import ast
-    username = request.user.username
-    if request.method == 'POST':
-        query = request.POST['query']
-        # username = request.POST['username']
-        output = results(query)
-        output = output.split('\n')
-        output = [x for x in output if x != 2]
-        data = userChatWithAI.objects.create(user=username, query=query, response=output)
-        data.save()
-        all_data = userChatWithAI.objects.filter(user=username)
-        all_data = all_data[::-1]
-        str_list = all_data[0].response
-        list_data = ast.literal_eval(str_list)
-        data_output = []
-        for i in all_data:
-            data_output.append([i.query,ast.literal_eval(i.response)])
-        return render(request, 'component/askalectogideon.html', {'all_data': data_output,'currentoutput':output})
-    all_data = userChatWithAI.objects.filter(user=username)
-    all_data = all_data[::-1]
-    data_output = []
-    for i in all_data:
-        data_output.append([i.query,ast.literal_eval(i.response)])
-    return render(request, 'component/askalectogideon.html',{'all_data': data_output})
 

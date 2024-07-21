@@ -51,6 +51,8 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     # 'component',
+    'learnwithusai',
+    'app_opportunities',
     'component.apps.MyAppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
