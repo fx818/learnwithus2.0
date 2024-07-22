@@ -20,9 +20,7 @@ urlpatterns = [
     path('logout',views.logout,name = 'logout'),
     path("profile_page", views.profile_page, name="profile_page"),
     path("profile_page/edit_your_profile", views.edit_your_profile, name="edit_your_profile"),
-    path("cse",views.cse,name='cse'),
-    path("et",views.et,name='et'),
-    path("notespedia",views.notespedia,name='notespedia'),
+    
     
     path('daily_leetcode_questions',views.daily_leetcode_questions,name = 'daily_leetcode_questions'),
     path('soon',views.soon,name = 'soon'),

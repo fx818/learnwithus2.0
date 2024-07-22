@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'app_opportunities',
     'app_courses',
     'app_infoPage',
+    'app_notespedia',
     'component.apps.MyAppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
