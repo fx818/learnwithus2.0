@@ -1,0 +1,30 @@
+.abs h1
+{
+    color: rgb(22, 33, 62);
+    text-decoration: underline;
+    padding-left: 0;
+    margin-left: 1rem;
+    font-family: 'Alkatra';
+    padding-bottom: 0rem;
+}
+
+.me
+{
+    /* margin-left: 1rem; */
+    margin-bottom: 3vw;
+    margin-top: 2vw;
+    /* padding-left: 1rem; */
+    margin-left: 1rem;
+    margin-right: 1.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 1rem;
+    border: 1px solid gray;
+    box-shadow: 1.5px 1.5px 8px rgb(22, 33, 62);
+
+}
+
+li
+{
+    font-size: larger;
+}

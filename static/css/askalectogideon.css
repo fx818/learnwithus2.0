@@ -1,3 +1,18 @@
+.form-data {
+    position: fixed;
+    bottom: 1rem;
+    display: grid;
+    grid-template-columns: 9fr 1fr;
+    align-items: center;
+    place-content: center;
+    place-items: center;
+
+}
+
+.form-data input {
+    height: fit-content;
+}
+
 *{
     color: white;
     background-color: rgb(38, 38, 38);
@@ -21,7 +36,7 @@ h1{
 textarea{
     width: 95%;
     border: 0;
-    padding: 0.5rem;
+    /* padding: 0.5rem; */
     margin-bottom: 1rem;
     margin-right: 2rem;
     font-family: cursive;

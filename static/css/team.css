@@ -1,0 +1,84 @@
+.member .images h1
+{
+    font-family: 'Alkatra';
+    color: rgb(22, 33, 62);
+    margin-left: 10%;
+    margin-top: -2%;
+}
+
+.team-head h1
+{
+    color: rgb(22, 33, 62);
+    text-decoration: underline;
+    padding-left: 0;
+    margin-left: 1rem;
+    font-family: 'Alkatra';
+    padding-bottom: 0rem;
+}
+
+.allmembers
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    place-content: center;
+    row-gap: 10vw;
+    margin-bottom: 10vw;
+}
+
+.member
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    place-content: center;
+    place-items: center;
+
+}
+
+.textdata
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    place-content: center;
+    align-items: center;
+}
+
+.member .images img
+{
+    border-radius: 5%;
+    width: 25vw;
+}
+
+
+.member .textdata p
+{
+    font-weight: 550;
+    width: 60%;
+    text-wrap: wrap;
+}
+
+.info
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.info img
+{
+    width: 3vw;
+    padding: 1vw;
+}
+
+li
+{
+    font-size: larger;
+}
+
+h2
+{
+    font-family: 'Alkatra';
+}

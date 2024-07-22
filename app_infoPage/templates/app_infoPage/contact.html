@@ -10,63 +10,8 @@ Contact Us
 Contact @ LearnWithUs
 {% endblock %}
 
-{% block style%}
-
-<style>
-    .form-div {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 3vw;
-    }
-
-    .form-div form {
-        border: 2px solid rgb(22, 33, 62);
-        display: flex;
-        /* grid-template-columns: 1fr; */
-        flex-direction: column;
-        /* flex-wrap: wrap; */
-        padding: 1rem;
-        /* margin-top: 2rem; */
-        border-radius: 1rem;
-        /* width: 75%; */
-        justify-content: center;
-        align-items: center;
-        place-content: center;
-        padding-left: 4rem;
-        padding-right: 4rem;
-    }
-
-    .form-div form input {
-        margin-top: 1rem;
-        height: 2rem;
-        padding-left: 2rem;
-        padding-right: 2rem;
-        border-radius: 1rem;
-        border: 1px solid rgb(22, 33, 62);
-        color: rgb(22, 33, 62);
-        outline: none;
-        font-weight: 600;
-    }
-
-    textarea {
-        padding: 1vw;
-        margin: 0;
-    }
-
-    .head-text {
-        text-align: center;
-        margin-top: 3vw;
-        margin-bottom: -2rem;
-    }
-
-    .submit {
-        background-color: rgb(22, 33, 62);
-        color: white;
-    }
-</style>
-
+{% block linkcss %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
 {% endblock %}
 
 
