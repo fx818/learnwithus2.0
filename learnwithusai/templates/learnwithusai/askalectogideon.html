@@ -8,7 +8,8 @@
     <title>Alecto Gideon</title>
     <link rel="icon" href="{% static 'images/alecto.png'  %}">
     <link rel="stylesheet" href="{% static 'css/askalectogideon.css' %}">
-
+    <script src="{% static 'JS/alecto.js' %}">
+    </script>
     <style>
         .form-data {
             position: fixed;
@@ -55,8 +56,10 @@
         <h2>You asked: {{ current_data.0 }}</h2>
 
         <p>
-            {% for data in current_data.1 %}
-            {{data}} <br>
+            {% for data in answer %}
+            <span style="white-space: break-spaces;">
+                {{data}}
+            </span> 
             {% endfor %}
         </p>
     </div>
@@ -82,7 +85,7 @@
     {% else %}
 
     <h2>Sorry, you are not logged in <br> You need to be logged in for accessing this page <br> <a
-            href="../userlogin">Login now</a></h2>
+            href="../../userlogin">Login now</a></h2>
 
     {% endif %}
 
@@ -95,18 +98,6 @@
 
 
 
-
-    <script>
-        function autoResizeTextarea(textarea) {
-            textarea.style.height = 'auto'; // Reset the height
-            textarea.style.height = textarea.scrollHeight + 'px'; // Set it to the scroll height
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const textarea = document.getElementById('autoResizeTextarea');
-            textarea.addEventListener('input', () => autoResizeTextarea(textarea));
-        });
-    </script>
 
 
 

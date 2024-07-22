@@ -12,13 +12,9 @@ urlpatterns = [
     path('emailotp',views.emailotp,name = 'emailotp'),
     path('verifyotp',views.verifyotp,name = 'verifyotp'),
     path('finalregister',views.finalregister,name = 'finalregister'),
-    path('courses',views.courses,name = 'courses'),
-    path('linux',views.linux,name = 'linux'),
-    path('python',views.python,name = 'python'),
-    path('copyright',views.copyright,name = 'copyright'),
-    path('contact',views.contact,name = 'contact'),
+
+    
     path('book',views.book,name = 'book'),
-    path('about',views.about,name = 'about'),
     path('msg',views.msg,name = 'msg'),
     path('loginerror',views.loginerror,name = 'loginerror'),
     path('logout',views.logout,name = 'logout'),
@@ -28,11 +24,6 @@ urlpatterns = [
     path("et",views.et,name='et'),
     path("notespedia",views.notespedia,name='notespedia'),
     
-    path("team",views.team, name= "team"),
-    path("terms_and_conditions",views.terms_and_conditions, name= "terms_and_conditions"),
-    path('C',views.C,name = 'C'),
-    path('HTML',views.HTML,name = 'HTML'),
-    path('css',views.css,name = 'css'),
     path('daily_leetcode_questions',views.daily_leetcode_questions,name = 'daily_leetcode_questions'),
     path('soon',views.soon,name = 'soon'),
     path('news',views.news,name = 'news'),

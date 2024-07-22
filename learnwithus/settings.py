@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     # 'component',
     'learnwithusai',
     'app_opportunities',
+    'app_courses',
+    'app_infoPage',
     'component.apps.MyAppConfig',
     'django.contrib.admin',
     'django.contrib.auth',

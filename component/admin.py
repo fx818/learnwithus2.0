@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Registration,techblogs,OTP,verifiedEmail, ContactModel, hackathonRegModel, UserActivity
+from .models import Registration,techblogs,OTP,verifiedEmail, hackathonRegModel, UserActivity
 # Register your models here.
 admin.site.register(Registration)
 
@@ -40,12 +40,6 @@ admin.site.register(verifiedEmail)
 admin.site.register(UserActivity)
 
 
-class ContactModelAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'question','college')
-    list_filter = ('email',)
-    search_fields = ('name', 'email')
-
-admin.site.register(ContactModel, ContactModelAdmin)
 
 
 class hackathonModelAdmin(admin.ModelAdmin):

@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Registration,techblogs, verifiedEmail, UserActivity
 from .utils import generate_otp, sendingmail
 from .models import OTP
-from .forms import hackathonRegForm, contactForm
+from .forms import hackathonRegForm
 
 
 import psycopg2
@@ -394,47 +394,10 @@ def writetechblog(request):
 
 
 
-def courses(request):
-    return render(request,'courses.html')
-
-
-def linux(request):
-    return render(request,'linux.html')
-
-def python(request):
-    return render(request,'python-course.html')
-
-def C(request):
-    return render(request,'C.html')
-
-def HTML(request):
-    return render(request,'HTML.html')
-
-def css(request):
-    return render(request,'css.html')
-
-
 def book(request):
     return render(request,'book.html')
 
 
-def about(request):
-    return render(request,'about.html')
-
-
-def copyright(request):
-    return render(request,'copyright.html')
-
-
-def contact(request):
-    if request.method == 'POST':
-        form = contactForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('msg') 
-    else:
-        form = contactForm()
-    return render(request,'contact.html',{'forms':form})
 
 
 
@@ -477,11 +440,6 @@ def et(request):
 def loginerror(request):
     return render(request,'loginerror.html')
 
-def team(request):
-    return render(request,'team.html')
-
-def terms_and_conditions(request):
-    return render(request, 'terms_and_conditions.html')
 
 
 def daily_leetcode_questions(request):
