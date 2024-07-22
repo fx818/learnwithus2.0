@@ -1,8 +1,10 @@
-html {
+html
+{
     overflow-x: hidden;
 }
 
-.header {
+.header
+{
     display: flex;
     justify-content: center;
     place-content: center;
@@ -21,11 +23,13 @@ html {
     font-family: cursive;
 }
 
-.header img {
+.header img
+{
     height: 10rem;
 }
 
-.navbar {
+.navbar
+{
     /* padding-top: 11VW; */
     margin-top: 1rem;
     display: flex;
@@ -40,7 +44,8 @@ html {
     border-radius: 1rem;
 }
 
-.navbar div {
+.navbar div
+{
     background-color: rgb(22, 33, 62);
     color: white;
     padding: .5rem;
@@ -50,37 +55,43 @@ html {
     font-weight: 600;
 }
 
-.container {
+.container
+{
     display: flex;
     justify-content: space-evenly;
     /* place-content: center; */
     align-items: center;
 }
 
-.container .container-img img {
+.container .container-img img
+{
     /* height: 25rem; */
     margin-top: 5vw;
 }
 
-.content {
+.content
+{
     font-weight: 700;
     padding: 0;
     /* margin-left: 3rem; */
 }
 
-.content .text1 {
+.content .text1
+{
     font-size: 5rem;
     font-weight: 900;
     /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
     font-family: cursive;
 }
 
-.content .text2 {
+.content .text2
+{
     font-size: 2.5rem;
     margin-top: -2.5rem;
 }
 
-.container input {
+.container input
+{
     border: 2px solid rgb(22, 33, 62);
     background-color: transparent;
     width: 23vw;
@@ -91,11 +102,13 @@ html {
     color: rgb(22, 33, 62);
 }
 
-.container input::placeholder {
+.container input::placeholder
+{
     color: rgb(22, 33, 62);
 }
 
-.container .login-link {
+.container .login-link
+{
     color: rgb(22, 33, 62);
     padding-top: 1rem;
     /* padding-left: 1rem; */
@@ -103,7 +116,8 @@ html {
     /* width:  */
 }
 
-.container .login-link a {
+.container .login-link a
+{
     border: 2px solid rgb(22, 33, 62);
     padding: .5rem;
     padding-right: 1.5rem;
@@ -117,7 +131,8 @@ html {
 
 }
 
-.opportunities .heading {
+.opportunities .heading
+{
     border: 2px solid rgb(22, 33, 62);
     background-color: rgb(22, 33, 62);
     color: white;
@@ -128,12 +143,14 @@ html {
 
 }
 
-.opportunities .alldata .data img {
+.opportunities .alldata .data img
+{
     height: 10vw;
     /* border-radius: 1.2rem; */
 }
 
-.opportunities .alldata .data {
+.opportunities .alldata .data
+{
     width: min-content;
     border: 2px solid rgb(22, 33, 62);
     border-radius: 1.2rem;
@@ -146,7 +163,8 @@ html {
 
 }
 
-.opportunities .alldata {
+.opportunities .alldata
+{
     display: flex;
     flex-wrap: nowrap;
     column-gap: 1rem;
@@ -155,19 +173,22 @@ html {
     overflow-x: scroll;
 }
 
-.opportunities .alldata::-webkit-scrollbar {
+.opportunities .alldata::-webkit-scrollbar
+{
     display: none;
 }
 
 
 
 
-.navbar {
+.navbar
+{
     width: 85vw;
     border-radius: 2rem;
 }
 
-.header {
+.header
+{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -176,17 +197,20 @@ html {
     /* margin-bottom: ; */
 }
 
-.header img {
+.header img
+{
     /* height: 10rem; */
     margin-top: 2rem;
 }
 
-a {
+a
+{
     text-decoration: none;
     color: inherit;
 }
 
-.explore-text {
+.explore-text
+{
     font-size: 1.9rem;
     width: fit-content;
     margin-bottom: -1rem;
@@ -198,14 +222,16 @@ a {
     /* font-weight: 100; */
 }
 
-.explore-text h1 {
+.explore-text h1
+{
     padding-bottom: 1rem;
     text-decoration: underline;
     border-bottom: 5px solid rgb(22, 33, 62);
     padding-right: 4rem;
 }
 
-.parent {
+.parent
+{
     display: flex;
     justify-content: center;
     place-content: center;
@@ -217,7 +243,8 @@ a {
     font-family: Alkatra;
 }
 
-.parent .child {
+.parent .child
+{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -226,18 +253,21 @@ a {
     text-align: center;
 }
 
-.parent .child p {
+.parent .child p
+{
     font-weight: 800;
     font-size: 1.2rem;
 
 }
 
-.parent .child h2 {
+.parent .child h2
+{
     font-size: 2.5rem;
     margin: 0;
 }
 
-.parent .child a {
+.parent .child a
+{
     border: 1px solid wheat;
     background-color: rgb(22, 33, 62);
     font-size: 1rem;
@@ -249,11 +279,13 @@ a {
     border-radius: 1rem;
 }
 
-.twitter {
+.twitter
+{
     filter: invert(100%);
 }
 
-footer {
+footer
+{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -269,13 +301,390 @@ footer {
     width: 100vw;
 }
 
-footer div a {
+footer div a
+{
     padding-left: 1.5rem;
     font-weight: 500;
 }
 
-footer div img {
+footer div img
+{
     height: 2rem;
     padding-left: 1.5rem;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* New CSS */
+
+
+.container
+{
+    display: flex;
+    justify-content: space-evenly;
+    /* place-content: center; */
+    align-items: center;
+}
+
+.container .container-img img
+{
+    /* height: 25rem; */
+    margin-top: 5vw;
+}
+
+.content
+{
+    font-weight: 700;
+    padding: 0;
+    /* margin-left: 3rem; */
+}
+
+.content .text1
+{
+    font-size: 5rem;
+    font-weight: 900;
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    font-family: "Protest Riot", sans-serif;
+    /* font-family: cursive; */
+}
+
+.content .text2
+{
+    font-size: 2.5rem;
+    margin-top: -2.5rem;
+}
+
+.container input
+{
+    border: 2px solid rgb(22, 33, 62);
+    background-color: transparent;
+    width: 23vw;
+    height: 2rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    padding-left: 1rem;
+    color: rgb(22, 33, 62);
+}
+
+.container input::placeholder
+{
+    color: rgb(22, 33, 62);
+}
+
+.container .login-link
+{
+    color: rgb(22, 33, 62);
+    padding-top: 1rem;
+    /* padding-left: 1rem; */
+    /* text-align: center; */
+    /* width:  */
+}
+
+.container .login-link a
+{
+    border: 2px solid rgb(22, 33, 62);
+    padding: .5rem;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+    background-color: rgb(22, 33, 62);
+    color: white;
+    text-decoration: none;
+    border-radius: 1rem;
+    /* font-family: cursive; */
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    font-family: "Protest Riot", sans-serif;
+
+    font-weight: 600;
+
+}
+
+.opportunities .heading
+{
+    border: 2px solid rgb(22, 33, 62);
+    background-color: rgb(22, 33, 62);
+    color: white;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    padding-left: 3rem;
+    border-radius: 2rem;
+
+}
+
+.opportunities .alldata .data img
+{
+    height: 10vw;
+    /* border-radius: 1.2rem; */
+}
+
+.opportunities .alldata .data
+{
+    width: min-content;
+    border: 2px solid rgb(22, 33, 62);
+    border-radius: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    place-content: center;
+    align-items: center;
+    padding: 1rem;
+
+}
+
+.opportunities .alldata
+{
+    display: flex;
+    flex-wrap: nowrap;
+    column-gap: 1rem;
+    margin-top: 1rem;
+    margin-left: 2.5rem;
+    overflow-x: scroll;
+}
+
+.opportunities .alldata::-webkit-scrollbar
+{
+    display: none;
+}
+
+
+
+.header
+{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    place-content: center;
+    place-items: center;
+    /* margin-bottom: ; */
+}
+
+.header img
+{
+    /* height: 10rem; */
+    margin-top: 2rem;
+}
+
+a
+{
+    text-decoration: none;
+    color: inherit;
+}
+
+.explore-text
+{
+    font-size: 1.9rem;
+    width: fit-content;
+    margin-bottom: -1rem;
+    padding-bottom: -1rem;
+    /* border-bottom: 5px solid rgb(22, 33, 62); */
+    margin-left: 3rem;
+    /* font-family: 'Madimi One'; */
+    font-family: "Protest Riot";
+    /* font-weight: 100; */
+}
+
+.explore-text h1
+{
+    padding-bottom: 1rem;
+    text-decoration: underline;
+    border-bottom: 5px solid rgb(22, 33, 62);
+    padding-right: 4rem;
+}
+
+.parent
+{
+    display: flex;
+    justify-content: center;
+    place-content: center;
+    align-items: center;
+    place-items: center;
+    column-gap: 8vw;
+    margin-bottom: 2rem;
+    margin-top: 4rem;
+    font-family: Alkatra;
+}
+
+.parent .child
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    place-content: center;
+    text-align: center;
+}
+
+.parent .child p
+{
+    font-weight: 800;
+    font-size: 1.2rem;
+
+}
+
+.parent .child h2
+{
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.parent .child a
+{
+    border: 1px solid wheat;
+    background-color: rgb(22, 33, 62);
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    padding: .5rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    border-radius: 1rem;
+}
+
+.competition video
+{
+    transform: skew(-10deg);
+    height: 25vw;
+    /* margin-left: 5vw; */
+    border-radius: 1rem;
+
+}
+
+.competition
+{
+    display: flex;
+    flex-direction: column;
+    row-gap: 6vw;
+    margin-top: 4vw;
+}
+
+.container-img img
+{
+    height: 25vw;
+}
+
+.video
+{
+    display: flex;
+    text-wrap: wrap;
+    column-gap: 5vw;
+    justify-content: space-evenly;
+    align-items: center;
+    place-items: center;
+    font-size: 1.2rem;
+}
+
+.video2
+{
+    flex-direction: row-reverse;
+}
+
+.video h3
+{
+    font-style: 'Protest Riot';
+    text-decoration: underline;
+    border-bottom: 2px solid rgb(22, 33, 62);
+    padding-bottom: .4rem;
+    padding-right: 1rem;
+    text-align: center;
+}
+
+@media (max-width: 900px)
+{
+
+    .container,
+    .parent
+    {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container-img img
+    {
+        height: 20vw;
+    }
+
+    .container input
+    {
+        width: 60vw;
+    }
+
+    .container
+    {
+        text-align: center;
+    }
+
+    .second
+    {
+        display: flex;
+        flex-direction: column-reverse;
+        row-gap: 2rem;
+    }
+
+    .video
+    {
+        flex-direction: column-reverse;
+    }
+
+    .competition video
+    {
+        height: 35vw;
+    }
+}
+
+@media (max-width: 500px)
+{
+    .container .text1
+    {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+
+    .container .text2
+    {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .parent img
+    {
+        height: 60vw;
+    }
+
+    .container-img img
+    {
+        height: 60vw;
+    }
+
+    .child h2
+    {
+        font-size: 1rem;
+    }
+
+    .explore-text h1
+    {
+        font-size: 2.5rem;
+        margin-left: -1rem;
+    }
+
+    .login-link
+    {
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 1rem;
+    }
+
+    .container input
+    {
+        width: 60vw;
+    }
+}

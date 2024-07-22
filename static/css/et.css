@@ -1,0 +1,105 @@
+header,
+footer
+{
+    background-color: rgba(8, 24, 39, 0.207) !important;
+}
+
+footer
+{
+    margin-top: 2rem !important;
+    box-shadow: 2px 2px 5px white !important;
+}
+
+.navbar
+{
+    margin-top: 1rem !important;
+    box-shadow: 1px 1px 5px white !important;
+    /* border: .1px solid white !important; */
+}
+
+.navbar div
+{
+    background-color: rgba(255, 255, 255, 0.914) !important;
+    color: rgb(22, 33, 62) !important;
+}
+
+
+html
+{
+    /* background-image: url("static/etimages/bg1.webp"); */
+    /* background-image: url("static/etimages/hero-bg.jpg"); */
+    background-image: url("static/etimages/contact-bg.jpg");
+    background-position: center;
+    background-repeat: repeat-y;
+    /* background-repeat: repeat; */
+    color: white !important;
+}
+
+.firstyear::-webkit-scrollbar,
+html::-webkit-scrollbar
+{
+    display: none;
+}
+
+.yearheading
+{
+    margin-top: 2rem;
+    margin-left: 3vw;
+    color: rgb(255, 255, 255);
+    text-decoration: underline;
+    border-bottom: 3px solid rgb(255, 255, 255);
+    width: fit-content;
+    padding-bottom: .5rem;
+    padding-right: 1rem;
+    font-family: "Protest Riot";
+    font-weight: 400;
+    /* background-color: rgb(22, 33, 62);
+        padding: .5rem;
+        padding-left: 1.2rem;
+        padding-right: 1.2rem;
+        border-radius: 1rem; */
+}
+
+.firstyear
+{
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 1rem;
+    box-shadow: 2px 2px 7px rgb(255, 255, 255);
+    display: flex;
+    column-gap: 3rem;
+    overflow-x: scroll;
+    padding: 1.5rem;
+    margin: 1rem;
+    margin-left: 3vw;
+}
+
+.firstyear img
+{
+    border-radius: 1.75rem;
+    width: 20vw;
+    /* margin-right: 1rem; */
+    /* border-radius: 1rem; */
+    box-shadow: 1px 1px 10px rgb(255, 255, 255);
+}
+
+.firstyear img:hover
+{
+    scale: 1.03;
+    /* width: 21vw; */
+    /* height: 18.5vw; */
+    box-shadow: 3px 3px 10px rgb(255, 255, 255);
+
+}
+
+.navbar
+{
+    box-shadow: 2px 2px 10px white;
+}
+
+@media (max-width:650px)
+{
+    .firstyear img
+    {
+        height: 25vw;
+    }
+}
