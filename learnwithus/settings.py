@@ -43,6 +43,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '172.31.5.103',
     '16.16.220.198',
+    'localhost',
+    
     # '192.168.121.180' # for my local development
 ]
 
