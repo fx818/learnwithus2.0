@@ -8,4 +8,5 @@ urlpatterns = [
     path('courses/C',views.CTemplate.as_view(), name = 'C'),
     path('courses/HTML',views.HTMLTemplate.as_view(),name = 'HTML'),
     path('courses/css',views.cssTemplate.as_view(), name = 'css'),
+    path('courses/numpy',views.numpyView.as_view(), name = 'numpy'),
 ]

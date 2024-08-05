@@ -407,8 +407,6 @@ def profile_page(request):
     activities = UserActivity.objects.filter(user=user.pk)
     activities = activities[::-1][:7]
     # print(activities)
-    for activity in activities:
-        print(activity.path)
     return render(request, 'profile_page.html',{'activities':activities})
 
 

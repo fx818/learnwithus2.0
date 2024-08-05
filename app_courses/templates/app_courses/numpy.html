@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numpy Quizz</title>
+
+    <style>
+        div {
+            margin: 1rem;
+            margin-top: 2rem;
+            padding-left: 2rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            padding-right: 2rem;
+        }
+
+        div p {
+            margin: .2rem;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Numpy Quizzes</h1>
+
+    {% for d in data %}
+    <div>
+        <b>Ques) {{d.question}}</b> <br>
+        <p>a) {{d.option1}}</p>
+        <p>b) {{d.option2}}</p>
+        <p>c) {{d.option3}}</p>
+        <p>d) {{d.option4}}</p>
+        <p><span id="answer-{{d.id}}">ans) (Hidden)</span></p>
+        <button onclick="toggleAnswer('{{d.id}}', '{{d.answer}}', this)">
+            Reveal answer
+        </button>
+    </div>
+
+
+    {% endfor %}
+
+    <script>
+
+        function toggleAnswer(id, answer, btn) {
+
+
+                var element = document.getElementById('answer-' + id);
+
+                if (element.innerText.includes('(Hidden)')) {
+                    element.innerText = 'ans) ' + answer;
+                    element.style.fontWeight="bold"
+                    btn.innerText = 'Hide Answer';
+                }
+                else {
+                    element.innerText = 'ans) (Hidden)';
+                    element.style.fontWeight="normal"
+                    btn.innerText = 'Reveal Answer';
+                }
+
+        }
+
+    </script>
+
+
+
+</body>
+
+</html>
