@@ -1,0 +1,27 @@
+div {
+    margin: 1rem;
+    margin-top: 2rem;
+    padding-left: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-right: 2rem;
+}
+
+div p {
+    margin: .2rem;
+}
+
+.bthome{
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    font-weight: 700;
+    text-decoration: None;
+    color: white;
+    border: 1px solid rgb(22,33,62);
+    background-color: rgb(22,33,62);
+    padding: .5rem 1.5rem;
+    border-radius: 1rem;
+
+
+}

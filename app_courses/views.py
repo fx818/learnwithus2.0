@@ -27,3 +27,24 @@ class numpyView(View):
         if serializer.is_valid():
             return render(request, 'app_courses/numpy.html', {'data':serializer.data, "length":len(details)})
         return render(request, 'app_courses/numpy.html', {'data':serializer.data, "length":len(details)})
+
+class PandasView(View):
+    
+    def get(self, request):
+        details = PandasMCQModel.objects.all()
+        serializer = PandasMCQSerializer(data=details, many = True)
+        # print(serializer)
+        if serializer.is_valid():
+            return render(request, 'app_courses/pandas-quiz.html', {'data':serializer.data, "length":len(details)})
+        return render(request, 'app_courses/pandas-quiz.html', {'data':serializer.data, "length":len(details)})
+   
+    
+class MatplotlibView(View):
+    
+    def get(self, request):
+        details = MatplotlibMCQModel.objects.all()
+        serializer = MatplotlibMCQSerializer(data=details, many = True)
+        # print(serializer)
+        if serializer.is_valid():
+            return render(request, 'app_courses/matplotlib-quiz.html', {'data':serializer.data, "length":len(details)})
+        return render(request, 'app_courses/matplotlib-quiz.html', {'data':serializer.data, "length":len(details)})
