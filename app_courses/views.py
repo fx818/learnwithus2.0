@@ -48,3 +48,33 @@ class MatplotlibView(View):
         if serializer.is_valid():
             return render(request, 'app_courses/matplotlib-quiz.html', {'data':serializer.data, "length":len(details)})
         return render(request, 'app_courses/matplotlib-quiz.html', {'data':serializer.data, "length":len(details)})
+    
+class PythonQuizView(View):
+    
+    def get(self, request):
+        details = PythonMCQModel.objects.all()
+        serializer = PythonMCQSerializer(data=details, many = True)
+        # print(serializer)
+        if serializer.is_valid():
+            return render(request, 'app_courses/python-quiz.html', {'data':serializer.data, "length":len(details)})
+        return render(request, 'app_courses/python-quiz.html', {'data':serializer.data, "length":len(details)})
+    
+class CSSQuizView(View):
+    
+    def get(self, request):
+        details = CSSMCQModel.objects.all()
+        serializer = CSSMCQSerializer(data=details, many = True)
+        # print(serializer)
+        if serializer.is_valid():
+            return render(request, 'app_courses/css-quiz.html', {'data':serializer.data, "length":len(details)})
+        return render(request, 'app_courses/css-quiz.html', {'data':serializer.data, "length":len(details)})
+    
+class LinuxQuizView(View):
+    
+    def get(self, request):
+        details = LinuxMCQModel.objects.all()
+        serializer = LinuxMCQSerializer(data=details, many = True)
+        # print(serializer)
+        if serializer.is_valid():
+            return render(request, 'app_courses/linux-quiz.html', {'data':serializer.data, "length":len(details)})
+        return render(request, 'app_courses/linux-quiz.html', {'data':serializer.data, "length":len(details)})

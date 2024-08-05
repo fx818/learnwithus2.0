@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Quizz</title>
+
+    <script src="{% static 'JS/linux-quiz.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'css/courses/linux-quiz.css' %}">
+
+</head>
+
+<body>
+
+    <h1>Linux Quizzes</h1>
+
+    {% for d in data %}
+    <div>
+        <b>Ques) {{d.question}}</b> <br>
+        <p>a) {{d.option1}}</p>
+        <p>b) {{d.option2}}</p>
+        <p>c) {{d.option3}}</p>
+        <p>d) {{d.option4}}</p>
+        <p><span id="answer-{{d.id}}">ans) (Hidden)</span></p>
+        <button onclick="toggleAnswer('{{d.id}}', '{{d.answer}}', this)">
+            Reveal answer
+        </button>
+    </div>
+    {% endfor %}
+
+    <a href="../../linux" class="bthome">
+        Back
+    </a>
+
+</body>
+
+</html>

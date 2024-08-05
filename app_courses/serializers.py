@@ -8,10 +8,25 @@ class NumpyMCQSerializer(serializers.ModelSerializer):
 
 class PandasMCQSerializer(serializers.ModelSerializer):
     class Meta:
-        model = NumpyMCQModel
+        model = PandasMCQModel
         fields = "__all__"
 
 class MatplotlibMCQSerializer(serializers.ModelSerializer):
     class Meta:
-        model = NumpyMCQModel
+        model = MatplotlibMCQModel
+        fields = "__all__"
+
+class PythonMCQSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PythonMCQModel
+        fields = "__all__"
+
+class CSSMCQSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CSSMCQModel
+        fields = "__all__"
+
+class LinuxMCQSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LinuxMCQModel
         fields = "__all__"

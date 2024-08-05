@@ -55,7 +55,7 @@ a{
 }
 /* .header h1{
     border-bottom: 1px solid rgb(22, 33, 62);
-    padding-left: 1vw;
+    padding-left: 1v    w;
     padding-right: 1vw;
     padding-bottom: 0;
     text-align: center;
@@ -89,4 +89,16 @@ a{
     height: 2.5rem;
     border: 0;
     rotate: 270deg;
+}
+
+
+.python-quiz-link{
+    position: fixed;
+    bottom: 1rem; 
+    left: 1rem; 
+    border: 1px solid black; 
+    padding: .3rem 1.5rem; 
+    background-color: black; 
+    color: white;
+    border-radius: .5rem;
 }

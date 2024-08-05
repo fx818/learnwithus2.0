@@ -63,3 +63,13 @@ p {
     }
 }
 
+.css-quiz-link{
+    position: fixed;
+    bottom: 1rem; 
+    left: 1rem; 
+    border: 1px solid black; 
+    padding: .3rem 1.5rem; 
+    background-color: black; 
+    color: white;
+    border-radius: .5rem;
+}
