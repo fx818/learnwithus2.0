@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class LearnwithusaiConfig(AppConfig):
+class AppProgramminghubConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'learnwithusai'
+    name = 'app_programmingHub'

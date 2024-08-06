@@ -83,6 +83,10 @@ span{
     }
 }
 
+a{
+    text-decoration: None;
+}
+
 .linux-quiz-link{
     position: fixed;
     bottom: 1rem; 

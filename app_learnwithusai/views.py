@@ -26,6 +26,7 @@ def askalectogideon(request):
             current = []
         else:
             current = data_output[0]
+        
         import spacy
         nlp = spacy.load('en_core_web_sm')
         
@@ -37,7 +38,7 @@ def askalectogideon(request):
             if data != [] or data!= '':
                 newResponse.append(' '.join(data))
             print("Printing data: ", data)
-        print(newResponse)
+        # print(newResponse)
         data_output[0][1] = newResponse
         current = data_output[0]
         

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Program Runner
+    </title>
+</head>
+<body>
+
+    <form action="../practicecode/" method="POST">
+        {% csrf_token %}
+        {% if code %}
+        <textarea name="usercode" id="usercode" rows="30" cols="80">{{code}}</textarea>
+        {% else %}
+        <textarea name="usercode" id="usercode" rows="30" cols="80">Write your code here</textarea>
+        {% endif %}
+        <input type="submit" value="Run code and see output">
+
+
+    </form>
+    {% if outputs %}
+    <h4>Our output</h4>
+    
+        {% for output in outputs %}
+            {{output}} <br>
+        {% endfor %}
+    {% else %}
+
+    <h3>Pahle code to likh fir output dekhna</h3>
+
+    {% endif %}
+
+</body>
+</html>
