@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice | LearnWithUs</title>
+</head>
+<body>
+    <h1>Here is the overview of every questions we have</h1>
+    <p>Total no of question we have is <b>{{noofquestions}}</b> </p>
+
+    {% for question in allquestions %}
+
+        <a href="{% url 'program-runner' pk=question.questionID %}">
+            {{question.questionID}})
+            {{question.title}} <br>
+        </a>
+
+    {% endfor %}
+
+    
+</body>
+</html>

@@ -4,21 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        Program Runner
+        Practice | LearnWithUs
     </title>
 </head>
 <body>
 
-    <form action="../practicecode/" method="POST">
+    <h1>Here is the your question</h1>
+    <h2> {{question.questionID}}) {{question.title}}</h2>
+    <h4>Description: {{question.description}}</h4>
+
+
+    <form action="{% url 'program-runner' pk=question.questionID %}" method="POST">
         {% csrf_token %}
         {% if code %}
-        <textarea name="usercode" id="usercode" rows="30" cols="80">{{code}}</textarea>
+        <textarea name="usercode" id="usercode" rows="15" cols="80">{{code}}</textarea>
         {% else %}
-        <textarea name="usercode" id="usercode" rows="30" cols="80">Write your code here</textarea>
+        <textarea name="usercode" id="usercode" rows="15" cols="80">Write your code here</textarea>
         {% endif %}
+        <br>
         <input type="submit" value="Run code and see output">
-
-
     </form>
     {% if outputs %}
     <h4>Our output</h4>
@@ -28,9 +32,13 @@
         {% endfor %}
     {% else %}
 
-    <h3>Pahle code to likh fir output dekhna</h3>
+    <h3>Pahle code to likh fir output dekhna be</h3>
 
     {% endif %}
+
+    <a href="../../practicecode" style="position: fixed; bottom: 1rem; right: 1rem;">
+        Back
+    </a>
 
 </body>
 </html>

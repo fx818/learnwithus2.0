@@ -1,6 +1,10 @@
 import sys
 import io
 
+import ast
+from .models import *
+
+
 class CodeRunner:
     def __init__(self):
         self.code = ""
@@ -38,22 +42,20 @@ class CodeRunner:
         return outputs
     
 
-def returnOutput(code):
+def returnOutput(code, testID):
     code_runner = CodeRunner()
     code_runner.set_code(code)
-    testcases = [
-        ("5\n", "25"),
-        ("10\n", "100"),
-        ("20\n", "400")
-    ]
+    
+    testcaseTestingMode = testCaseModel.objects.get(testID=testID)
 
+    inputString = testcaseTestingMode.testcases
+    inputString = inputString.replace('\n','')    
+    resulted = ast.literal_eval(inputString)
+    testcases = resulted
+    
     outputs = code_runner.test_code(testcases)
     tobesent = []
     for i, output in enumerate(outputs):       
-        # print(f"Testcase {i+1}:")
-        # print(f"Expected output: {testcases[i][1]}")
-        # print(f"Actual output: {output[0]}")
-        # print()
         c = 0
         if int(testcases[i][1]) != int(output[0]):
             tobesent.append(["Some error with your code"])
