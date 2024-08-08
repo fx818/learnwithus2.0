@@ -151,12 +151,12 @@ DEFAULT_FROM_EMAIL = 'anuragfx818@gmail.com'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
 
 # railway
 # DATABASES = {
@@ -205,16 +205,16 @@ DATABASES = {
 
 
 # Using Supabase
-# DATABASES = {
-#     'default':{
-#         "ENGINE":"django.db.backends.postgresql",
-#         "NAME":'postgres',
-#         "USER":'postgres.mvaonazvlarpgxcrjpsp',
-#         'PASSWORD':'@learnwithus818@',
-#         'HOST':'aws-0-ap-south-1.pooler.supabase.com',
-#         'PORT':'5432'
-#     }
-# }
+DATABASES = {
+    'default':{
+        "ENGINE":"django.db.backends.postgresql",
+        "NAME":'postgres',
+        "USER":'postgres.mvaonazvlarpgxcrjpsp',
+        'PASSWORD':'@learnwithus818@',
+        'HOST':'aws-0-ap-south-1.pooler.supabase.com',
+        'PORT':'5432'
+    }
+}
 
 
 
@@ -246,7 +246,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Kolkata"
 
 USE_I18N = True
 
@@ -265,6 +265,7 @@ USE_TZ = True
 
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATICFILES_DIRS = (os.path.join(BASE_DIR , 'static'),)  # Note the comma at the end of the line
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build')  # Remove the space before 'staticfiles_build'

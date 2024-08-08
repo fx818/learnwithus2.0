@@ -64,3 +64,8 @@ This is the official repository for the organisation `LearnWithUs`
   1. Anurag Upadhyay
   2. Yash Chaudhary
   3. Akash Chaurasiya
+
+<!-- To run the docker -->
+<!-- docker build -t learnwithus-container . -->
+<!-- docker rm learnwithus-container --force -->
+<!-- docker run --name learnwithus-container -p 8000:8000 learnwithus-container -->

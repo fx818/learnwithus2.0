@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Submissions</title>
+</head>
+
+<body>
+    <h1>You will see the submissions over here</h1>
+
+    {% if submissionDetail is None %}
+
+    <p>Login krke aa bhai</p>
+    <a href="../../../userlogin">Login kr hi leta hu</a>
+
+    {% elif submissionDetail is not False %}
+    {% for data in submissionDetail %}
+
+    Submission Id {{data.submissionID}} <br>
+    Submission Detail {{data.submissionDetail}} <br>
+    Submitted at {{data.submittedAt}} <br> <br>
+
+    {% endfor %}
+
+
+    {% else %}
+
+    <p>You have not submitted anything</p>
+
+    {% endif %}
+    
+
+</body>
+
+</html>
