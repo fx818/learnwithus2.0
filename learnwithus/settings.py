@@ -72,6 +72,10 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://learnwithus20-production.up.railway.app',
+]
+
 
 AUTH_USER_MODEL = 'component.CustomUser'
 
