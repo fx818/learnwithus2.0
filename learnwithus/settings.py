@@ -74,6 +74,7 @@ INSTALLED_APPS = [
 
 CSRF_TRUSTED_ORIGINS = [
     'https://learnwithus20-production.up.railway.app',
+    'https://www.learnwithus.org.in',
 ]
 
 
