@@ -7,34 +7,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Python Quizz</title>
 
-    <script src="{% static 'JS/python-quiz.js' %}"></script>
-
+    
     <link rel="stylesheet" href="{% static 'css/courses/python-quiz.css' %}">
-
+    
 </head>
 
 <body>
-
-    <h1>Python Quizzes</h1>
-
-    {% for d in data %}
-    <div>
-        <b>Ques) {{d.question}}</b> <br>
-        <p>a) {{d.option1}}</p>
-        <p>b) {{d.option2}}</p>
-        <p>c) {{d.option3}}</p>
-        <p>d) {{d.option4}}</p>
-        <p><span id="answer-{{d.id}}">ans) (Hidden)</span></p>
-        <button onclick="toggleAnswer('{{d.id}}', '{{d.answer}}', this)">
-            Reveal answer
-        </button>
-    </div>
-    {% endfor %}
-
+    
+    <h1 class="heading">Python Quizzes</h1>
+    
+    <main>
+        <div class="left">
+            <a href="basic">
+                <p id="basic">Basic</p>
+            </a>
+            <a href="intermediate">
+                <p id="intermediate">Intermediate</p>
+            </a>
+            <a href="advanced">
+                <p id="advanced">Advanced</p>
+            </a>
+        </div>
+        
+        <div class="right">
+            {% for d in data %}
+            <div class="question-answer">
+                <b>Ques) {{d.question}}</b> <br>
+                <p>a) {{d.option1}}</p>
+                <p>b) {{d.option2}}</p>
+                <p>c) {{d.option3}}</p>
+                <p>d) {{d.option4}}</p>
+                <p><span id="answer-{{d.id}}">ans) (Hidden)</span></p>
+                <button class="revealbtn" onclick="toggleAnswer('{{d.id}}', '{{d.answer}}', this)">
+                    Reveal answer
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+    
     <a href="../../python-tutorial" class="bthome">
         Back
     </a>
-
+    
+    
+    
+    <script src="{% static 'JS/python-quiz.js' %}"></script>
 </body>
 
 </html>

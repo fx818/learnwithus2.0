@@ -1,16 +1,3 @@
-div {
-    margin: 1rem;
-    margin-top: 2rem;
-    padding-left: 2rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-right: 2rem;
-}
-
-div p {
-    margin: .2rem;
-}
-
 .bthome{
     position: fixed;
     bottom: 1rem;
@@ -22,6 +9,78 @@ div p {
     background-color: rgb(22,33,62);
     padding: .5rem 1.5rem;
     border-radius: 1rem;
+}
 
+.question-answer{
+    border: 1px solid black;
+    border-radius: .5rem;
+}
+
+main{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    padding: 0;
+    margin: 0;
+    
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+main .left p, main .right div p{
+    padding: 0;
+    margin: 0;
+    margin-top: .2rem;
+}
+
+main .left, main .right div{
+    padding: .5rem;
+}
+
+main .left p{
+    border: 1px solid black;
+    padding: 1rem .1rem 1rem .1rem;
+    border-radius: .5rem;
+    text-align: center;
 
 }
+
+main .right div{
+    margin: .2rem;
+    margin-right: 1rem;
+}
+
+.heading{
+    text-align: center;
+}
+
+main .left p {
+    background-color: rgb(255, 255, 255);
+    font-weight: 600;
+    color: black;
+    cursor: pointer;
+    padding: 10px;
+}
+
+main .left p.active {
+    background-color: rgb(22, 33, 62);
+    color: white;
+}
+
+
+.revealbtn{
+    background-color: rgb(22, 33, 62);
+    border-radius: .4rem;
+    padding: .2rem .5rem;
+    color: white;
+    font-weight: 550;
+}
+
+
+/* Do something for the left section */
+
+/*
+main .left p:not(){
+    color: white;
+} 
+*/

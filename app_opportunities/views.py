@@ -128,10 +128,13 @@ def opportunities(request):
     competetion = CompetetionModel.objects.all()
     scholarship = scholarshipModel.objects.all()
     job = jobModel.objects.all()
+    
+    print(internships)
+    
     return render(request,'app_opportunities/opportunities.html',
-                  {'internships':internships,
-                   'competetions':competetion,
-                   'scholarships':scholarship,
-                   'jobs':job
+                  {'internships':internships[::-1],
+                   'competetions':competetion[::-1],
+                   'scholarships':scholarship[::-1],
+                   'jobs':job[::-1]
                    }
                   )

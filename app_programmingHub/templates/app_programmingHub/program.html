@@ -9,6 +9,8 @@
 </head>
 <body>
 
+    <h1>This is in development phase, will be back soon</h1>
+<!-- 
     <h1>Here is the your question</h1>
     <h2> {{question.questionID}}) {{question.title}}</h2>
     <h4>Description: {{question.description}}</h4>
@@ -19,7 +21,10 @@
         {% if code %}
         <textarea name="usercode" id="usercode" rows="15" cols="80">{{code}}</textarea>
         {% else %}
-        <textarea name="usercode" id="usercode" rows="15" cols="80">Write your code here</textarea>
+        <textarea name="usercode" id="usercode" rows="15" cols="80">def main():
+    // Code here
+    // print the output too
+        </textarea>
         {% endif %}
         <br>
         <input type="submit" value="Run code and see output">
@@ -42,7 +47,7 @@
 
     <button>
         <a href="{% url 'seeAllSubmission' pk=question.questionID %}">See your submission</a>
-    </button>
+    </button> -->
 
 </body>
 </html>
