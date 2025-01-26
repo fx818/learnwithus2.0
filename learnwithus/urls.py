@@ -15,7 +15,7 @@ urlpatterns = [
     path('',include('app_infoPage.urls')),
     path('',include('app_notespedia.urls')),
     path('',include('app_programmingHub.urls')),
-    path("accounts/",include("allauth.urls")),
+    path("accounts/", include("allauth.urls")),
 ]
 
 

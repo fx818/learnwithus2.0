@@ -5,7 +5,7 @@ import os
 
 os.environ["OPENAI_API_BASE"] = 'https://api.groq.com/openai/v1'
 os.environ["OPENAI_MODEL_NAME"] ='llama3-70b-8192'
-os.environ["OPENAI_API_KEY"] ='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'
+os.environ["OPENAI_API_KEY"] ='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'
 
 responder = Agent(
     role = "AI assistant",
